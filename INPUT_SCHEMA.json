@@ -10,7 +10,7 @@
             "description": "Search for an specific terms and extract tweets for that term."
         },
         "handle": {
-            "title": "List of usernames to scrape",
+            "title": "Usernames",
             "type": "array",
             "description": "The twitter handles of the profiles you want to scrape. Shortcut instead of inputting https://twitter.com/username urls",
             "default": [],
