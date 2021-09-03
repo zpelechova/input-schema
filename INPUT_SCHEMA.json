@@ -14,7 +14,7 @@
             "type": "array",
             "description": "The twitter handles of the profiles you want to scrape. Shortcut instead of inputting https://twitter.com/username urls",
             "default": [],
-            "prefill": ["elonmusk", "patrickc"],
+            "prefill": ["elonmusk"],
             "editor": "stringList"
         },
         "startUrls": {
@@ -81,7 +81,9 @@
             "description": "Will get tweets that are newer than this date. Can be used in conjunction with 'Tweets older than' to create specific date slices. Can use specific dates, such as YYYY-MM-DD or relative ones, like '1 month' or '2 days'",
             "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
             "type": "string",
-            "editor": "textfield"
+            "editor": "textfield",
+            "sectionCaption": "Time frame",
+            "sectionDescription": "You can choose a specific time window you want to scraoe the tweets from."
         },
         "fromDate": {
             "title": "Tweets older than",
@@ -100,7 +102,10 @@
             "default": {
                 "useApifyProxy": true
             },
-            "editor": "proxy"
+            "editor": "proxy",
+            "sectionCaption": "Proxy configuration",
+            "sectionDescription": "Choose what proxies you are going to use."
+
         },
         "extendOutputFunction": {
             "title": "Extend Output Function",
