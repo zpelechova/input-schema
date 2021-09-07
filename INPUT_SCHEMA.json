@@ -83,7 +83,7 @@
             "type": "string",
             "editor": "textfield",
             "sectionCaption": "Time frame",
-            "sectionDescription": "You can choose a specific time window you want to scraoe the tweets from."
+            "sectionDescription": "You can choose a specific time window you want to scrape the tweets from."
         },
         "fromDate": {
             "title": "Tweets older than",
@@ -178,7 +178,7 @@
             "prefill": [],
             "description": "Your login cookies will be used to bypass the login wall. See <a href='https://apify.com/vdrmota/twitter-scraper'>README</a> for instructions.",
             "editor": "json",
-            "sectionCaption": "Login information",
+            "sectionCaption": "Login (optional)",
             "sectionDescription": "By providing login information you can have more access to data."
         }
     },
