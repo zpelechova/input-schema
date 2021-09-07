@@ -6,6 +6,7 @@
         "searchTerms": {
             "title": "Search terms",
             "type": "array",
+            "prefill": ["Apify"],
             "editor": "stringList",
             "description": "Search for an specific terms and extract tweets for that term."
         },
@@ -13,8 +14,6 @@
             "title": "Usernames",
             "type": "array",
             "description": "The twitter handles of the profiles you want to scrape. Shortcut instead of inputting https://twitter.com/username urls",
-            "default": [],
-            "prefill": ["elonmusk"],
             "editor": "stringList"
         },
         "startUrls": {
