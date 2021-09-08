@@ -66,7 +66,7 @@
           "description": "How many times a page will be retried in case of being blocked or other errors.",
           "default": 5,
           "sectionCaption": "Scraper configuration",
-          "sectionDescription": "soon."
+          "sectionDescription": "Here you can change different attributes of the scraper."
       },
       "scrollWaitSecs": {
           "title": "Scroll wait seconds",
