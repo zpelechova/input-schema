@@ -60,27 +60,6 @@
           "unit": "per page",
           "default": 200
       },
-      "maxRequestRetries": {
-          "title": "Max request retries",
-          "type": "integer",
-          "description": "How many times a page will be retried in case of being blocked or other errors.",
-          "default": 5,
-          "sectionCaption": "Scraper configuration",
-          "sectionDescription": "Here you can change different attributes of the scraper."
-      },
-      "scrollWaitSecs": {
-          "title": "Scroll wait seconds",
-          "type": "integer",
-          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
-          "default": 3
-      },
-      "proxy": {
-          "title": "Proxy configuration",
-          "type": "object",
-          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
-          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
-          "editor": "proxy"
-      },
       "scrapePostsUntilDate": {
           "title": "Scrape until date",
           "type": "string",
@@ -162,6 +141,27 @@
           "editor": "number",
           "unit": "users",
           "default": 0
+      },
+      "maxRequestRetries": {
+          "title": "Max request retries",
+          "type": "integer",
+          "description": "How many times a page will be retried in case of being blocked or other errors.",
+          "default": 5,
+          "sectionCaption": "Scraper configuration",
+          "sectionDescription": "Here you can change different attributes of the scraper."
+      },
+      "scrollWaitSecs": {
+          "title": "Scroll wait seconds",
+          "type": "integer",
+          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
+          "default": 3
+      },
+      "proxy": {
+          "title": "Proxy configuration",
+          "type": "object",
+          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
+          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+          "editor": "proxy"
       },
       "extendOutputFunction": {
           "title": "Extend Output Function",
