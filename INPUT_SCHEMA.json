@@ -11,6 +11,15 @@
           "editor": "textfield",
           "prefill": "Nature"
       },
+      "directUrls": {
+        "title": "Direct Instagram page URLs",
+        "type": "array",
+        "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
+        "editor": "stringList",
+        "placeholderValue": "URL",
+        "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
+        "uniqueItems": true
+    },
       "searchType": {
           "title": "Search type",
           "type": "string",
@@ -19,24 +28,6 @@
           "enum": ["user", "hashtag", "place", "stories"],
           "enumTitles": ["Search users", "Search hashtags", "Search places (scrolls only with login)", "Stories (Only with login)"],
           "default": "hashtag"
-      },
-      "searchLimit": {
-          "title": "Search results limit",
-          "type": "integer",
-          "description": "How many search results (eq. pages) should be processed.",
-          "editor": "number",
-          "default": 10,
-          "minimum": 1,
-          "maximum": 100
-      },
-      "directUrls": {
-          "title": "Direct Instagram page URLs",
-          "type": "array",
-          "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
-          "editor": "stringList",
-          "placeholderValue": "URL",
-          "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
-          "uniqueItems": true
       },
       "resultsType": {
           "title": "What to scrape from each page.",
@@ -52,6 +43,15 @@
               "Cookies (will export cookies gained by login using IG credentials - loginUsername, loginPassword, these cookies can be used in later runs for authorization)"],
           "default": "posts"
       },
+      "searchLimit": {
+          "title": "Search results limit",
+          "type": "integer",
+          "description": "How many search results (eq. pages) should be processed.",
+          "editor": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 100
+      },
       "resultsLimit": {
           "title": "Max items",
           "type": "integer",
@@ -64,13 +64,30 @@
           "title": "Max request retries",
           "type": "integer",
           "description": "How many times a page will be retried in case of being blocked or other errors.",
-          "default": 5
+          "default": 5,
+          "sectionCaption": "Scraper configuration",
+          "sectionDescription": "soon."
+      },
+      "scrollWaitSecs": {
+          "title": "Scroll wait seconds",
+          "type": "integer",
+          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
+          "default": 3
+      },
+      "proxy": {
+          "title": "Proxy configuration",
+          "type": "object",
+          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
+          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+          "editor": "proxy"
       },
       "scrapePostsUntilDate": {
           "title": "Scrape until date",
           "type": "string",
           "description": "Scrapes post from the current date until it reaches a post older than a provided date. The date should be in format YYYY-MM-DD. By default scrapes all posts.",
-          "editor": "hidden"
+          "editor": "hidden",
+          "sectionCaption": "Time frame",
+          "sectionDescription": "If you want to scrape posts or comments from specific time frame."
       },
       "fromDate": {
           "title": "Scrape from date",
@@ -85,19 +102,6 @@
           "description": "Scrapes posts and comments from the current date until it reaches a post older than a provided date. The date should be in format YYYY-MM-DD. By default scrapes all posts.",
           "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
           "editor": "textfield"
-      },
-      "scrollWaitSecs": {
-          "title": "Scroll wait seconds",
-          "type": "integer",
-          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
-          "default": 3
-      },
-      "proxy": {
-          "title": "Proxy configuration",
-          "type": "object",
-          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
-          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
-          "editor": "proxy"
       },
       "loginCookies": {
           "title": "Cookies",
