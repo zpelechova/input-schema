@@ -54,13 +54,13 @@
       "directUrls": {
         "title": "Direct URLs",
         "type": "array",
-        "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
+        "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here.",
         "editor": "stringList",
         "placeholderValue": "URL",
         "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
         "uniqueItems": true,
         "sectionCaption": "Direct URLs",
-        "sectionDescription": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login."
+        "sectionDescription": "This field is optional, but this field or 'Search' must be provided. Location URLs scroll only with login."
     },
       "scrapePostsUntilDate": {
           "title": "Scrape until date",
