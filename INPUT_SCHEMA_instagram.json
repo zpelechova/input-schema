@@ -11,15 +11,6 @@
           "editor": "textfield",
           "prefill": "Nature"
       },
-      "directUrls": {
-        "title": "Direct Instagram page URLs",
-        "type": "array",
-        "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
-        "editor": "stringList",
-        "placeholderValue": "URL",
-        "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
-        "uniqueItems": true
-    },
       "searchType": {
           "title": "Search type",
           "type": "string",
@@ -60,6 +51,17 @@
           "unit": "per page",
           "default": 200
       },
+      "directUrls": {
+        "title": "Direct URLs",
+        "type": "array",
+        "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
+        "editor": "stringList",
+        "placeholderValue": "URL",
+        "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
+        "uniqueItems": true,
+        "sectionCaption": "Direct URLs",
+        "sectionDescription": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login."
+    },
       "scrapePostsUntilDate": {
           "title": "Scrape until date",
           "type": "string",
@@ -82,7 +84,28 @@
           "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
           "editor": "textfield"
       },
-      "loginCookies": {
+      "maxRequestRetries": {
+        "title": "Max request retries",
+        "type": "integer",
+        "description": "How many times a page will be retried in case of being blocked or other errors.",
+        "default": 5,
+        "sectionCaption": "Proxy & scraper configuration",
+        "sectionDescription": "Here you can change different attributes of the scraper."
+    },
+    "scrollWaitSecs": {
+        "title": "Scroll wait seconds",
+        "type": "integer",
+        "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
+        "default": 3
+    },
+    "proxy": {
+        "title": "Proxy configuration",
+        "type": "object",
+        "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
+        "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+        "editor": "proxy"
+    },
+    "loginCookies": {
           "title": "Cookies",
           "type": "array",
           "description": "If you want to sign in to Instagram to have access to more data than on anonymous profile, but do not wish to have your credentials in input, then you can use your cookies.",
@@ -141,27 +164,6 @@
           "editor": "number",
           "unit": "users",
           "default": 0
-      },
-      "maxRequestRetries": {
-          "title": "Max request retries",
-          "type": "integer",
-          "description": "How many times a page will be retried in case of being blocked or other errors.",
-          "default": 5,
-          "sectionCaption": "Scraper configuration",
-          "sectionDescription": "Here you can change different attributes of the scraper."
-      },
-      "scrollWaitSecs": {
-          "title": "Scroll wait seconds",
-          "type": "integer",
-          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
-          "default": 3
-      },
-      "proxy": {
-          "title": "Proxy configuration",
-          "type": "object",
-          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
-          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
-          "editor": "proxy"
       },
       "extendOutputFunction": {
           "title": "Extend Output Function",
