@@ -42,7 +42,7 @@
             "type": "string",
             "description": "Here you can provide a search query which will be used to search Instagram for profiles, hashtags or places. <br /><br /><strong>This field is optional, but this field or 'Direct Instagram page URLs' must be provided</strong>",
             "editor": "textfield",
-            "sectionCaption": "Using searach term instead of direct URL",
+            "sectionCaption": "Using key word for search instead of direct URL",
             "sectionDescription": "This field is optional, but this field or 'Search' must be provided. Location URLs scroll only with login."
         },
         "searchType": {
@@ -90,20 +90,6 @@
             "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
             "editor": "textfield"
         },
-        "maxRequestRetries": {
-            "title": "Max request retries",
-            "type": "integer",
-            "description": "How many times a page will be retried in case of being blocked or other errors.",
-            "default": 5,
-            "sectionCaption": "Proxy & browser configuration",
-            "sectionDescription": "Here you can change different attributes of the scraper."
-        },
-        "scrollWaitSecs": {
-            "title": "Scroll wait seconds",
-            "type": "integer",
-            "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
-            "default": 3
-        },
         "proxy": {
             "title": "Proxy configuration",
             "type": "object",
@@ -112,7 +98,21 @@
                 "useApifyProxy": true,
                 "apifyProxyGroups": ["RESIDENTIAL"]
             },
-            "editor": "proxy"
+            "editor": "proxy",
+            "sectionCaption": "Proxy & browser configuration",
+            "sectionDescription": "Here you can change different attributes of the scraper."
+        },
+        "maxRequestRetries": {
+            "title": "Max request retries",
+            "type": "integer",
+            "description": "How many times a page will be retried in case of being blocked or other errors.",
+            "default": 5
+        },
+        "scrollWaitSecs": {
+            "title": "Scroll wait seconds",
+            "type": "integer",
+            "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
+            "default": 3
         },
         "loginCookies": {
             "title": "Cookies",
