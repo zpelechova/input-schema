@@ -10,7 +10,7 @@
             "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here.",
             "editor": "stringList",
             "placeholderValue": "URL",
-            "prefill": "https://www.instagram.com/apifytech/",
+            "prefill": ["https://www.instagram.com/apifytech/"],
             "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
             "uniqueItems": true
         },
