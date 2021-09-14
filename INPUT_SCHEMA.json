@@ -1,124 +1,38 @@
 {
-    "title": "Input schema for the youtube-search-scraper actor",
+    "title": "Input schema for Actor IMDB Scraper",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "searchKeywords": {
-            "title": "Search keywords",
-            "type": "string",
-            "description": "What to search Youtube for",
-            "editor": "textfield",
-            "prefill": "Madonna",
-            "minLength": 3,
-            "maxLength" : 250,
-            "nullable": false
-        },
-        "maxResults": {
-            "title": "Maximum search results",
-            "type": "integer",
-            "description": "Limit number of videos to crawl; <br />for 'No limits' empty the field",
-            "minimum": 1,
-            "maximum": 999999,
-            "prefill": 50,
-            "unit": "Videos",
-            "nullable": true
-        },
         "startUrls": {
-            "title": "Direct URLs",
+            "title": "Start URLs",
             "type": "array",
-            "description": "Provide some direct Youtube urls, like channel urls or search urls. When provided, it disables search.",
-            "default": [],
             "editor": "requestListSources",
-            "sectionCaption": "Direct URLs"
+            "description": "List of URLs that will be scraped or crawled.",
+            "prefill": [
+                { "url": "https://www.imdb.com/search/title/?title_type=feature&user_rating=9.5" }
+            ]
         },
-        "postsFromDate": {
-            "title": "Videos till",
-            "type": "string",
-            "editor": "textfield",
-            "description": "How far back in history to go e.g <br />30 minutes <br />1 week <br />5 months <br />4 years, etc.<br />for 'No limits' empty the field",
-            "pattern": "(^(1|([^0a-zA-Z ][0-9]{0,3})) (minute|hour|day|week|month|year))s?",
-            "minLength": 0,
-            "maxLength": 16,
-            "prefill": "5 years",
-            "nullable": true,
-            "sectionCaption": "Time frame"
-        },
-        "downloadSubtitles": {
-            "title" : "Download subtitles",
-            "type": "boolean",
-            "description" : "If set to true, we will also download subtitles for given video and convert it to SRT format",
-            "sectionCaption": "Subtitles",
-            "sectionDescription": "Use this if you want to download video subtitles as well."
-        },
-        "saveSubsToKVS": {
-            "title" : "Save downloaded subtitles to Key Value Store",
-            "type": "boolean",
-            "description" : "If set to true, we will save downloaded (and converted to .srt format) subtitles to Key Value Store in format { subtitles: srt_text }. 'downloadSubtitles' must be set to true for this take an effect"
-        },
-        "subtitlesLanguage": {
-            "title" : "Download subtitles in selected language",
-            "type": "string",
-            "description" : "Language to download subtitles in. 'downloadSubtitles' must be set to true for this take an effect",
-            "editor": "select",
-            "default" : "en",
-            "enum" : ["en", "de", "es", "fr", "it", "ja", "ko", "nl", "pt", "ru"],
-            "enumTitles" : ["English", "German", "Spanish", "French", "Italian", "Japanese", "Korean", "Holland", "Portuguese", "Russian"]
+        "maxItems": {
+            "title": "Max items",
+            "type": "integer",
+            "minimum": 1,
+            "description": "Limit of detail/product pages to be scraped"
         },
         "extendOutputFunction": {
-            "title": "Extend Output Function",
-            "description": "Add or remove properties on the output object or omit the output returning null",
+            "title": "Extend output function",
             "type": "string",
-            "default": "",
-            "prefill": "async ({ data, item, page, request, customData }) => {\n  return item; \n}",
-            "editor": "javascript",
-            "sectionCaption": "Extend scraper functionality",
-            "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior for"
-        },
-        "extendScraperFunction": {
-            "title": "Extend Scraper Function",
-            "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
-            "type": "string",
-            "default": "",
-            "prefill": "async ({ page, request, requestQueue, customData, Apify, extendOutputFunction }) => {\n \n}",
+            "nullable": true,
+            "description": "Function that takes a JQuery handle ($) as argument and returns data that will be merged with the default output",
+            "prefill": "($) => { return {} }",
             "editor": "javascript"
-        },
-        "customData": {
-            "title": "Custom data",
-            "description": "Any data that you want to have available inside the Extend Output/Scraper Function",
-            "default": {},
-            "prefill": {},
-            "type": "object",
-            "editor": "json"
-        },
-        "handlePageTimeoutSecs": {
-            "title": "Handle page timeout",
-            "description": "Set the handlePageTimeout seconds",
-            "default": 3600,
-            "prefill": 3600,
-            "type": "integer",
-            "editor": "number"
         },
         "proxyConfiguration": {
             "title": "Proxy configuration",
             "type": "object",
             "editor": "proxy",
             "description": "The best option is usually Automatic proxy. But you can also use your own proxies or no proxy",
-            "prefill": {
-                "useApifyProxy": true
-            },
-            "default": {
-                "useApifyProxy": true
-            },
-            "sectionCaption": "Proxy and scraper configuration"
-        },
-        "verboseLog": {
-            "title": "Verbose log",
-            "type": "boolean",
-            "description": "Debug messages will be included in the log.",
-            "default": false
+            "prefill": { "useApifyProxy": true }
         }
     },
-    "required": [
-        "proxyConfiguration"
-    ]
+    "required": ["startUrls"]
 }
