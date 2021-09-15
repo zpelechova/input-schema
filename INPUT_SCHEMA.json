@@ -8,7 +8,6 @@
       "title": "Region",
       "type": "string",
       "description": "Location name as you would enter to TripAdvisor search. Actor takes the first result as desired location. Input countries, cities, neighborhoods",
-      "default": "Prague",
       "prefill": "Prague",
       "editor": "textfield"
     },
@@ -32,14 +31,14 @@
       "default": true
     },
     "checkInDate": {
-      "title": "Check in date (YYYY-MM-DD)",
+      "title": "Hotel check-in date (YYYY-MM-DD)",
       "type": "string",
       "default": "",
       "description": "Hotel rooms prices will be calculated for this date",
       "editor": "textfield"
     },
     "includeAttractions": {
-      "title": "Include things to do [BETA]",
+      "title": "Include things to do",
       "type": "boolean",
       "description": "If checked results includes hotels for given location.",
       "default": false
