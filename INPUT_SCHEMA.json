@@ -5,16 +5,16 @@
   "schemaVersion": 1,
   "properties": {
     "locationFullName": {
-      "title": "Region",
+      "title": "Search",
       "type": "string",
       "description": "Location name as you would enter to TripAdvisor search. Actor takes the first result as desired location. Input countries, cities, neighborhoods",
       "prefill": "Prague",
       "editor": "textfield"
     },
     "maxItems": {
-      "title": "Limit the number of places to be scraped",
+      "title": "Max search results",
       "type": "integer",
-      "description": "Use '0' to not limit the number of places scraped",
+      "description": "Limit the number of places to be scraped. Use '0' to not limit the number of places scraped",
       "default": 0
     },
     "includeRestaurants": {
