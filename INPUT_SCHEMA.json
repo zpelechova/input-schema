@@ -12,6 +12,7 @@
       "searchTerms": {
           "title": "Search terms",
           "type": "array",
+          "editor": "textfield",
           "description": "Video tag search terms."
       },
       "proxyConfiguration": {
