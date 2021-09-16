@@ -5,10 +5,11 @@
   "properties": {
       
       "searchTerms": {
-          "title": "Search terms",
+          "title": "Hashtag to scrape",
           "type": "array",
           "editor": "stringList",
-          "description": "Video tag search terms."
+          "description": "Video tag search terms.",
+          "prefill": ["amazing"]
       },
       "startURLs": {
           "title": "Start URLs",
