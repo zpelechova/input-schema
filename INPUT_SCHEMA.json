@@ -1,58 +1,56 @@
 {
-  "title": "DNB.com Scraper",
-  "description": "An actor that scrapes company information from Dun & Bradstreet",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-      "mode":{
-          "title": "Mode (*)",
-          "description": "Select the mode that you want to initiate the actor",
-          "type":"string",
-          "editor": "select",
-          "default": "COMPANIES",
-          "enum": ["COMPANIES", "ARTICLES", "INDUSTRIES"],
-          "enumTitles": ["Companies", "Articles","Industries"]
-      },
-      "search":{
-          "title": "Search (*)",
-          "type": "string",
-          "description": "The keyword that you want to search on",
-          "editor": "textfield"
-      },
-      "startUrls": {
-          "title": "Start URLs",
-          "type": "array",
-          "sectionCaption": "Actor options",
-          "description": "URLs to start with",
-          "prefill": [
-              "https://www.dnb.com/business-directory/industry-analysis.technology-office-equipment-leasing.html" ,
-              "https://www.dnb.com/perspectives/corporate-compliance/achieve-greater-fatca-and-crs-compliance.html" ,
-              "https://www.dnb.com/business-directory/company-profiles.guizhou_huaheng_qiming_information_technology_coltd.db83f5f5b062bfd743ac193ac95683a4.html",
-              "https://www.dnb.com/business-directory/company-information.beer-wine-distilled-spirits-wholesalers.au.victoria.melbourne.html"
-          ],
-          "editor": "stringList"
-      },
-      "proxy":{
-          "title": "Proxy configuration",
-          "type": "object",
-          "description": "Select proxies to be used by your crawler.",
-          "prefill": { "useApifyProxy": true },
-          "editor": "proxy"
-      },
-      "maxItems":{
-          "title": "Maximum number of items",
-          "type": "integer",
-          "description": "Maximum number of items that you want as output. Default is all",
-          "editor": "number",
-          "default": 50
-      },
-      "extendOutputFunction": {
-          "title": "Extend output function",
-          "type": "string",
-          "editor": "javascript",
-          "description": "A function which result will get merged with the default result",
-          "prefill": "($) => {\n    const result = {};\n    // Uncomment to add a title to the output\n    // result.title = $('title').text().trim();\n\n    return result;\n}",
-          "sectionCaption": "Advanced options"
-      }
-  }
+    "title": "DNB.com Scraper",
+    "description": "An actor that scrapes company information from Dun & Bradstreet",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "startUrls": {
+            "title": "Start URLs",
+            "type": "array",
+            "description": "URLs to start with",
+            "prefill": [
+                "https://www.dnb.com/business-directory/company-information.beer-wine-distilled-spirits-wholesalers.au.victoria.melbourne.html"
+            ],
+            "editor": "stringList"
+        },
+        "maxItems": {
+            "title": "Maximum number of items",
+            "type": "integer",
+            "description": "Maximum number of items that you want as output. Default is all",
+            "editor": "number",
+            "default": 50
+        },
+        "search": {
+            "title": "Search (*)",
+            "type": "string",
+            "description": "The keyword that you want to search on",
+            "editor": "textfield",
+            "sectionCaption": "Search options"
+        },
+        "mode": {
+            "title": "Mode (*)",
+            "description": "Select the mode that you want to initiate the actor",
+            "type": "string",
+            "editor": "select",
+            "default": "COMPANIES",
+            "enum": ["COMPANIES", "ARTICLES", "INDUSTRIES"],
+            "enumTitles": ["Companies", "Articles", "Industries"]
+        },
+        "proxy": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Select proxies to be used by your crawler.",
+            "prefill": { "useApifyProxy": true },
+            "editor": "proxy",
+            "sectionCaption": "Proxy configuration"
+        },
+        "extendOutputFunction": {
+            "title": "Extend output function",
+            "type": "string",
+            "editor": "javascript",
+            "description": "A function which result will get merged with the default result",
+            "prefill": "($) => {\n    const result = {};\n    // Uncomment to add a title to the output\n    // result.title = $('title').text().trim();\n\n    return result;\n}",
+            "sectionCaption": "Advanced options"
+        }
+    }
 }
