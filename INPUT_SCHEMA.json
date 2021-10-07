@@ -68,6 +68,8 @@
             "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
             "type": "string",
             "editor": "textfield",
+            "sectionCaption": "Do you want to set specific dates?",
+            "sectionDescription": "You can choose to scrape only tweets older or newer than a specific date. You can use YYYY-MM-DD format or just relative dates like '1 month' or '2 days'."
         },
         "fromDate": {
             "title": "Tweets older than",
