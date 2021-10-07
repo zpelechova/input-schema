@@ -1,174 +1,113 @@
 {
-  "title": "Input schema for Instagram scraper",
-  "description": "Below you can provide search query which will be used to search Instagram for profiles, hashtags or places. Alternatively you can provide direct page URLs. <br />Then on each page you can scrape page details, posts or comments. <br/> <strong>Important: Proxy is required to use this solution</strong>",
+  "title": "Twitter scraper",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-      "search": {
-          "title": "Search",
-          "type": "string",
-          "description": "Here you can provide a search query which will be used to search Instagram for profiles, hashtags or places. <br /><br /><strong>This field is optional, but this field or 'Direct Instagram page URLs' must be provided</strong>",
-          "editor": "textfield",
-          "prefill": "Nature"
-      },
-      "searchType": {
-          "title": "Search type",
-          "type": "string",
-          "description": "What type of pages to search (you can search hashtags, profiles and places)",
-          "editor": "select",
-          "enum": ["user", "hashtag", "place", "stories"],
-          "enumTitles": ["Search users", "Search hashtags", "Search places (scrolls only with login)", "Stories (Only with login)"],
-          "default": "hashtag"
-      },
-      "searchLimit": {
-          "title": "Search results limit",
-          "type": "integer",
-          "description": "How many search results (eq. pages) should be processed.",
-          "editor": "number",
-          "default": 10,
-          "minimum": 1,
-          "maximum": 100
-      },
-      "directUrls": {
-          "title": "Direct Instagram page URLs",
+      "searchTerms": {
+          "title": "Do you want to add some search terms?",
           "type": "array",
-          "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
+          "prefill": ["Apify"],
           "editor": "stringList",
-          "placeholderValue": "URL",
-          "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
-          "uniqueItems": true
+          "description": "If you add search terms, the scraper will find and extract tweets that mention those terms."
       },
-      "resultsType": {
-          "title": "What to scrape from each page.",
-          "type": "string",
-          "description": "What to scrape from each Instagram page URL or search result.  You need to provide correct parent pages, e.g. comments can be scraped only from posts, not from profiles.",
+      "searchMode": {
+          "title": "Do you want to choose the kind of content to scrape?",
+          "description": "This setting will change how the data is received by the scraper.",
           "editor": "select",
-          "enum": ["posts", "comments", "details", "stories", "cookies"],
+          "type": "string",
+          "prefill": "",
+          "enum": ["", "live", "user", "image", "video"],
+          "enumTitles": ["Top", "Latest", "People", "Photos", "Videos"]
+      },
+      "mode": {
+          "title": "What kinds of tweets do you want to scrape?",
+          "description": "You can choose to only scrape a user's own tweets or you can choose to also scrape the user's own tweets and the user's replies to other users.",
+          "type": "string",
+          "editor": "select",
+          "prefill": "replies",
+          "default": "replies",
           "enumTitles": [
-              "Posts (from profile pages, hashtag or place search)",
-              "Comments (from post pages)",
-              "Details (of profiles, posts or search pages - from a profile, post or search pages)",
-              "Stories",
-              "Cookies (will export cookies gained by login using IG credentials - loginUsername, loginPassword, these cookies can be used in later runs for authorization)"],
-          "default": "posts"
+              "Only own tweets",
+              "Own tweets and replies to other users"
+          ],
+          "enum": ["own", "replies"]
       },
-      "resultsLimit": {
-          "title": "Max items",
+      "tweetsDesired": {
+          "title": "Set the maximum number of tweets",
           "type": "integer",
-          "description": "How many posts or comments to scrape from each Instagram URL or found page, ignored when \"Details\" type is specified. Notice that if you use search via hashtags or place, each found page will have this limit separately. You can limit searchLimit to reduce the number of total results.",
-          "editor": "number",
-          "unit": "per page",
-          "default": 200
+          "description": "This value lets you set the maximum number of tweets to retrieve. Twitter has a default limit of around 3,200 tweets. Check the README for workarounds.",
+          "maximum": 3300,
+          "prefill": 100,
+          "default": 100
       },
-      "maxRequestRetries": {
-          "title": "Max request retries",
-          "type": "integer",
-          "description": "How many times a page will be retried in case of being blocked or other errors.",
-          "default": 5
+      "addUserInfo": {
+          "title": "Add user information",
+          "description": "Appends an object to each tweet containing the user information. You can decrease the size of your dataset by turning this off.",
+          "default": true,
+          "type": "boolean",
+          "editor": "checkbox"
+      },
+      "handle": {
+        "title": "Do you want to add some Twitter handles?",
+        "type": "array",
+        "description": "You can add the twitter handles of specific profiles you want to scrape. This is a shortcut so that you don't have to add full username URLs like https://twitter.com/username.",
+        "editor": "stringList",
+        "sectionCaption": "Do you want to scrape based on different input?",
+        "sectionDescription": "xxx"
+    },
+    "startUrls": {
+        "title": "Do you want to add Twitter URLs to tell the scraper where to start?",
+        "description": "You can enter URLs one by one. You can also link to or upload a text file with a list of URLs.",
+        "default": [],
+        "type": "array",
+        "editor": "requestListSources"
+    },
+    "toDate": {
+          "title": "Tweets newer than",
+          "description": "Scrape tweets newer than this date. You can use this in conjunction with 'Tweets older than' to create a limited time slice. ",
+          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
+          "type": "string",
+          "editor": "textfield",
+          "sectionCaption": "Do you want to set specific dates?",
+          "sectionDescription": "You can choose to scrape only tweets older or newer than a specific date. You can use YYYY-MM-DD format or just relative dates like '1 month' or '2 days'."
       },
       "fromDate": {
-          "title": "Scrape from date",
+          "title": "Tweets older than",
+          "description": "Scrape tweets from this date and before. You can use this in conjunction with 'Tweets newer than'to create a limited time slice.",
           "type": "string",
-          "description": "Scrapes post and comments from the current date until it reaches a post older than a provided date. The date should be in format YYYY-MM-DD or relative time . By default scrapes all posts.",
-          "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
+          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
           "editor": "textfield"
       },
-      "untilDate": {
-          "title": "Scrape until date",
-          "type": "string",
-          "description": "Scrapes posts and comments from the current date until it reaches a post older than a provided date. The date should be in format YYYY-MM-DD. By default scrapes all posts.",
-          "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
-          "editor": "textfield"
-      },
-      "scrollWaitSecs": {
-          "title": "Scroll wait seconds",
-          "type": "integer",
-          "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
-          "default": 3
-      },
-      "proxy": {
+      "proxyConfig": {
           "title": "Proxy configuration",
           "type": "object",
-          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
-          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
-          "editor": "proxy"
-      },
-      "loginCookies": {
-          "title": "Cookies",
-          "type": "array",
-          "description": "If you want to sign in to Instagram to have access to more data than on anonymous profile, but do not wish to have your credentials in input, then you can use your cookies.",
-          "editor": "json",
-          "sectionCaption": "Login using cookies",
-          "sectionDescription": "Instagram limits access to certain data (likes, post user data, followers and others) if a user is anonymous. You can provide your cookies here (copied from chrome plugin like 'EditThisCookie' to use a normal account. Do not use your own cookies here and rather create a new temporary account. When cookies are used, the run is limited to concurrency 1 and one session, so that the account does not get banned too soon."
-      },
-      "maxErrorCount": {
-          "title": "Max error count cookies",
-          "type": "integer",
-          "description": "Setting this number too high might get your account blocked faster",
-          "editor": "number",
-          "default": 15
-      },
-      "cookiesPerConcurrency": {
-          "title": "Concurrency",
-          "type": "integer",
-          "description": "Set number of cookies that are used per one concurrent browser. (e.g. if set to 3 and set 6 sets of loginCookies, then it will run with concurrency 2 so each browser can choose randomly from three sets of cookies.)",
-          "editor": "number",
-          "default": 1
-      },
-      "loginUsername": {
-          "title": "Login Username",
-          "type": "string",
-          "description": "Login for IG account. You will have to fill in code, that you receive to email connected to IG account.",
-          "editor": "textfield"
-      },
-      "loginPassword": {
-          "title": "Login Password",
-          "type": "string",
-          "description": "Password for IG account. You will have to fill in code, that you receive to email connected to IG account.",
-          "editor": "textfield"
-      },
-      "likedByLimit": {
-          "title": "Get post likes",
-          "type": "integer",
-          "description": "If this limit is set above 0, then the solution will attempt to load additional details about users who liked the post.",
-          "editor": "number",
-          "unit": "likes",
-          "default": 0,
-          "sectionCaption": "Followers, following, likes",
-          "sectionDescription": "Features that require login. If limits in this section are set above 0, then when the solution enters a page, it attempts to load the specified items until the limit is reached. "
-      },
-      "followingLimit": {
-          "title": "Get profile following",
-          "type": "integer",
-          "description": "If this limit is set above 0, then the solution will attempt to find users who the profile owner is following.",
-          "editor": "number",
-          "unit": "users",
-          "default": 0
-      },
-      "followedByLimit": {
-          "title": "Get profile followed by",
-          "type": "integer",
-          "description": "If this limit is set above 0, then the solution will attempt to find users who the profile owner is followed by.",
-          "editor": "number",
-          "unit": "users",
-          "default": 0
+          "description": "This is required if you want to use Apify Proxy.",
+          "prefill": {
+              "useApifyProxy": true
+          },
+          "default": {
+              "useApifyProxy": true
+          },
+          "editor": "proxy",
+          "sectionCaption": "Proxy configuration",
+          "sectionDescription": "Choose which proxies to use."
       },
       "extendOutputFunction": {
           "title": "Extend Output Function",
           "description": "Add or remove properties on the output object or omit the output returning null",
           "type": "string",
-          "default": "",
-          "prefill": "async ({ data, item, helpers, page, customData, label }) => {\n  return item;\n}",
+          "default": "async ({ data, item, page, request, customData, Apify }) => {\n  return item;\n}",
+          "prefill": "async ({ data, item, page, request, customData, Apify }) => {\n  return item;\n}",
           "editor": "javascript",
           "sectionCaption": "Extend scraper functionality",
-          "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior on the scraper."
+          "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior to the scraper."
       },
       "extendScraperFunction": {
           "title": "Extend Scraper Function",
           "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
           "type": "string",
-          "default": "",
-          "prefill": "async ({ page, request, label, response, helpers, requestQueue, logins, addProfile, addPost, addLocation, addHashtag, doRequest, customData, Apify }) => {\n \n}",
+          "default": "async ({ page, request, addSearch, addProfile, _, addThread, addEvent, customData, Apify, signal, label }) => {\n \n}",
+          "prefill": "async ({ page, request, addSearch, addProfile, _, addThread, addEvent, customData, Apify, signal, label }) => {\n \n}",
           "editor": "javascript"
       },
       "customData": {
@@ -179,42 +118,54 @@
           "type": "object",
           "editor": "json"
       },
-      "expandOwners": {
-          "title": "Query post owner",
-          "type": "boolean",
-          "description": "If this feature is used, then for each post the solution will attempt to query additional details about it's owner. This will drastically slow down the crawling speed and increase the chance of an account ban if credentials are provided.",
-          "editor": "checkbox",
-          "default": false,
-          "sectionCaption": "Experimental features",
-          "sectionDescription": "Features in this section are highly experimental, can result in a ban of the account if logged in and might cause the solution to fail."
-      },
-      "maxConcurrency": {
-          "title": "Max Concurrency",
-          "type": "integer",
-          "description": "Max number of allowed instances running in parallel. More instances need more memory!",
+      "handlePageTimeoutSecs": {
+          "title": "Max timeout seconds",
+          "description": "Max timeout for the handlePageFunction. Can be increased for long running processes",
+          "default": 5000,
+          "prefill": 5000,
           "editor": "number",
-          "default": 1000
+          "type": "integer"
       },
-      "useStealth": {
-          "title": "Use stealth",
+      "stealth": {
+          "title": "Stealth",
+          "description": "Enabling stealth allows to decrease the chance of your scrape being detected as an automated process. We recommend enabling this if you provide your login cookies.",
+          "default": false,
           "type": "boolean",
-          "description": "Enable stealth in case of increased blocking",
-          "editor": "checkbox",
-          "default": false
+          "editor": "checkbox"
+      },
+      "maxRequestRetries": {
+          "title": "Max request retries",
+          "description": "Set the max request retries",
+          "default": 3,
+          "prefill": 3,
+          "type": "integer",
+          "editor": "number"
+      },
+      "maxIdleTimeoutSecs": {
+          "title": "Scrolling idle seconds",
+          "description": "Configures how many seconds of no data received will be considered done",
+          "default": 30,
+          "prefill": 30,
+          "type": "integer",
+          "editor": "number"
       },
       "debugLog": {
-          "title": "Debug Log",
-          "description": "Enable a more verbose logging to be able to understand what's happening during the scraping",
-          "type": "boolean",
+          "title": "Debug log",
+          "description": "Enable debug log",
           "default": false,
+          "type": "boolean",
           "editor": "checkbox"
       },
-      "includeHasStories": {
-          "title": "Include Has Stories",
-          "type": "boolean",
-          "description": "If this feature is used, then for each user detail property has_public_story from xhr request is parsed.",
-          "editor": "checkbox"
+      "initialCookies": {
+          "title": "Login cookies",
+          "type": "array",
+          "default": [],
+          "prefill": [],
+          "description": "Your login cookies will be used to bypass the login wall. Check the README for detailed instructions.",
+          "editor": "json",
+          "sectionCaption": "Login (optional)",
+          "sectionDescription": "You will have access to more data if you provide Twitter login information."
       }
   },
-  "required": ["proxy"]
+  "required": ["proxyConfig"]
 }
