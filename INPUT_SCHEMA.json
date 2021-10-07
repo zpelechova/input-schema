@@ -1,16 +1,40 @@
 {
   "title": "Input schema for Instagram scraper",
-  "description": "Below you can provide search query which will be used to search Instagram for profiles, hashtags or places. Alternatively you can provide direct page URLs. <br />Then on each page you can scrape page details, posts or comments. <br/> <strong>Important: Residential proxy is required to use this solution</strong>",
+  "description": "Below you can provide search query which will be used to search Instagram for profiles, hashtags or places. Alternatively you can provide direct page URLs. <br />Then on each page you can scrape page details, posts or comments. <br/> <strong>Important: Proxy is required to use this solution</strong>",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
+      "search": {
+          "title": "Search",
+          "type": "string",
+          "description": "Here you can provide a search query which will be used to search Instagram for profiles, hashtags or places. <br /><br /><strong>This field is optional, but this field or 'Direct Instagram page URLs' must be provided</strong>",
+          "editor": "textfield",
+          "prefill": "Nature"
+      },
+      "searchType": {
+          "title": "Search type",
+          "type": "string",
+          "description": "What type of pages to search (you can search hashtags, profiles and places)",
+          "editor": "select",
+          "enum": ["user", "hashtag", "place", "stories"],
+          "enumTitles": ["Search users", "Search hashtags", "Search places (scrolls only with login)", "Stories (Only with login)"],
+          "default": "hashtag"
+      },
+      "searchLimit": {
+          "title": "Search results limit",
+          "type": "integer",
+          "description": "How many search results (eq. pages) should be processed.",
+          "editor": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 100
+      },
       "directUrls": {
-          "title": "Direct URLs",
+          "title": "Direct Instagram page URLs",
           "type": "array",
-          "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here.",
+          "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>This field is optional, but this field or 'Search' must be provided</strong>. Location URLs scroll only with login.",
           "editor": "stringList",
           "placeholderValue": "URL",
-          "prefill": ["https://www.instagram.com/apifytech/"],
           "patternValue": "https:\\/\\/www\\.instagram\\.com\\/.+",
           "uniqueItems": true
       },
@@ -25,8 +49,7 @@
               "Comments (from post pages)",
               "Details (of profiles, posts or search pages - from a profile, post or search pages)",
               "Stories",
-              "Cookies (will export cookies gained by login using IG credentials - loginUsername, loginPassword, these cookies can be used in later runs for authorization)"
-          ],
+              "Cookies (will export cookies gained by login using IG credentials - loginUsername, loginPassword, these cookies can be used in later runs for authorization)"],
           "default": "posts"
       },
       "resultsLimit": {
@@ -37,44 +60,11 @@
           "unit": "per page",
           "default": 200
       },
-      "search": {
-          "title": "Search",
-          "type": "string",
-          "description": "Here you can provide a search query which will be used to search Instagram for profiles, hashtags or places. <br /><br /><strong>This field is optional, but this field or 'Direct Instagram page URLs' must be provided</strong>",
-          "editor": "textfield",
-          "sectionCaption": "Using key word for search instead of direct URL",
-          "sectionDescription": "This field is optional, but this field or 'Search' must be provided. Location URLs scroll only with login."
-      },
-      "searchType": {
-          "title": "Search type",
-          "type": "string",
-          "description": "What type of pages to search (you can search hashtags, profiles and places)",
-          "editor": "select",
-          "enum": ["user", "hashtag", "place", "stories"],
-          "enumTitles": [
-              "Search users",
-              "Search hashtags",
-              "Search places (scrolls only with login)",
-              "Stories (Only with login)"
-          ],
-          "default": "hashtag"
-      },
-      "searchLimit": {
-          "title": "Search results limit",
+      "maxRequestRetries": {
+          "title": "Max request retries",
           "type": "integer",
-          "description": "How many search results (eq. pages) should be processed.",
-          "editor": "number",
-          "default": 10,
-          "minimum": 1,
-          "maximum": 100
-      },
-      "scrapePostsUntilDate": {
-          "title": "Scrape until date",
-          "type": "string",
-          "description": "Scrapes post from the current date until it reaches a post older than a provided date. The date should be in format YYYY-MM-DD. By default scrapes all posts.",
-          "editor": "hidden",
-          "sectionCaption": "Time frame",
-          "sectionDescription": "If you want to scrape posts or comments from specific time frame."
+          "description": "How many times a page will be retried in case of being blocked or other errors.",
+          "default": 5
       },
       "fromDate": {
           "title": "Scrape from date",
@@ -90,36 +80,25 @@
           "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
           "editor": "textfield"
       },
-      "proxy": {
-          "title": "Proxy configuration",
-          "type": "object",
-          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
-          "prefill": {
-              "useApifyProxy": true,
-              "apifyProxyGroups": ["RESIDENTIAL"]
-          },
-          "editor": "proxy",
-          "sectionCaption": "Proxy & browser configuration",
-          "sectionDescription": "Here you can change different attributes of the scraper."
-      },
-      "maxRequestRetries": {
-          "title": "Max request retries",
-          "type": "integer",
-          "description": "How many times a page will be retried in case of being blocked or other errors.",
-          "default": 5
-      },
       "scrollWaitSecs": {
           "title": "Scroll wait seconds",
           "type": "integer",
           "description": "How many seconds it will wait every 100 posts/comments when scrolling. If you scrape more than 1000 items, it is important to slow down to not get blocked. The seconds are randomized a bit. If you get blocked anyway, try to increase this number.",
           "default": 3
       },
+      "proxy": {
+          "title": "Proxy configuration",
+          "type": "object",
+          "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify RESIDENTIAL proxy, or provide your own proxy servers. Non-RESIDENTIAL proxy groups usually don't work.",
+          "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+          "editor": "proxy"
+      },
       "loginCookies": {
           "title": "Cookies",
           "type": "array",
           "description": "If you want to sign in to Instagram to have access to more data than on anonymous profile, but do not wish to have your credentials in input, then you can use your cookies.",
           "editor": "json",
-          "sectionCaption": "Login",
+          "sectionCaption": "Login using cookies",
           "sectionDescription": "Instagram limits access to certain data (likes, post user data, followers and others) if a user is anonymous. You can provide your cookies here (copied from chrome plugin like 'EditThisCookie' to use a normal account. Do not use your own cookies here and rather create a new temporary account. When cookies are used, the run is limited to concurrency 1 and one session, so that the account does not get banned too soon."
       },
       "maxErrorCount": {
@@ -155,7 +134,7 @@
           "editor": "number",
           "unit": "likes",
           "default": 0,
-          "sectionCaption": "Followers, following, likes (only with login)",
+          "sectionCaption": "Followers, following, likes",
           "sectionDescription": "Features that require login. If limits in this section are set above 0, then when the solution enters a page, it attempts to load the specified items until the limit is reached. "
       },
       "followingLimit": {
