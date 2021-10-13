@@ -10,9 +10,29 @@
           "prefill": "New York",
           "editor": "textfield"
       },
-      "destType": {
+      "maxPages": {
+        "title": "Maximum pagination pages",
+        "type": "integer",
+        "description": "Number of pagination pages to be crawled",
+        "maximum": 1000000,
+        "prefill": 2
+    },
+    "simple": {
+        "title": "Extract hotel list pages only (no detail)",
+        "type": "boolean",
+        "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
+        "default": false
+    },
+    "useFilters": {
+        "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
+        "type": "boolean",
+        "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
+        "default": false
+    },
+    "destType": {
           "title": "Destination type",
           "type": "string",
+          "editor": "select",
           "description": "Type of the destination",
           "default": "city",
           "enum": [
@@ -22,7 +42,8 @@
           "enumTitles": [
               "City",
               "Region"
-          ]
+          ],
+          "sectionCaption": "Filters"           
       },
       "startUrls": {
           "title": "Start URLs",
@@ -33,6 +54,7 @@
       "sortBy": {
           "title": "Order results by",
           "type": "string",
+          "editor": "select",
           "description": "Hotel attribute by which the results will be ordered",
           "prefill": "distance_from_search",
           "enum": [
@@ -61,13 +83,6 @@
           "type": "string",
           "description": "Minimum rating of a hotel",
           "editor": "textfield"
-      },
-      "maxPages": {
-          "title": "Maximum pagination pages",
-          "type": "integer",
-          "description": "Number of pagination pages to be crawled",
-          "maximum": 1000000,
-          "prefill": 2
       },
       "checkIn": {
           "title": "Check-in date (yyyy-mm-dd)",
@@ -140,33 +155,23 @@
           "type": "object",
           "description": "SHADER proxy group usually works the best if you have access to it.",
           "prefill": { "useApifyProxy": true },
-          "editor": "proxy"
-      },
-      "simple": {
-          "title": "Extract hotel list pages only (no detail)",
-          "type": "boolean",
-          "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
-          "default": false
-      },
-      "useFilters": {
-          "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
-          "type": "boolean",
-          "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
-          "default": false
+          "editor": "proxy",
+          "sectionCaption": "Proxy Configuration" 
       },
       "testProxy": {
-          "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
-          "type": "boolean",
-          "description": "Before starting crawling, the crawler will try to find a proxy that's not blocked by Booking.",
-          "default": false
-      },
+        "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
+        "type": "boolean",
+        "description": "Before starting crawling, the crawler will try to find a proxy that's not blocked by Booking.",
+        "default": false
+        },
       "extendOutputFunction": {
           "title": "Extend output function",
           "type": "string",
           "nullable": true,
           "description": "Function that takes a JQuery handle ($) as argument and returns data that will be merged with the default output",
           "prefill": "($) => { return {} }",
-          "editor": "javascript"
+          "editor": "javascript",
+          "sectionCaption": "Extend output" 
       }
   },
   "required": [
