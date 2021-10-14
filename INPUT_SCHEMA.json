@@ -1,389 +1,172 @@
 {
-    "title": "Booking Crawler input",
+    "title": "Twitter scraper",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "search": {
-            "title": "Booking search query",
-            "type": "string",
-            "description": "Query string to be searched on Booking.com",
-            "prefill": "New York",
-            "editor": "textfield"
-        },
-        "destType": {
-            "title": "Destination type",
-            "type": "string",
-            "editor": "select",
-            "description": "Type of the destination",
-            "default": "city",
-            "enum": ["city", "region"],
-            "enumTitles": ["City", "Region"]
-        },
-        
-        "propertyType": {
-            "title": "Property type",
-            "type": "string",
-            "description": "Property type filter",
-            "default": "none",
-            "enum": [
-                "none",
-                "Hotels",
-                "Apartments",
-                "Hostels",
-                "Guest houses",
-                "Homestays",
-                "Bed and breakfasts",
-                "Holiday homes",
-                "Boats",
-                "Villas",
-                "Motels",
-                "Holiday parks",
-                "Campsites",
-                "Luxury tents"
-            ]
-        },
-        "maxPages": {
-            "title": "Maximum pagination pages",
-            "type": "integer",
-            "description": "Number of pagination pages to be crawled",
-            "maximum": 1000000,
-            "prefill": 2
-        },
-        "sortBy": {
-            "title": "Order results by",
-            "type": "string",
-            "editor": "select",
-            "description": "Hotel attribute by which the results will be ordered",
-            "prefill": "distance_from_search",
-            "enum": [
-                "upsort_bh",
-                "price",
-                "closest_ski_lift_distance",
-                "class",
-                "class_asc",
-                "class_and_price",
-                "distance_from_search",
-                "bayesian_review_score"
-            ],
-            "enumTitles": [
-                "Show homes first",
-                "Price (lowest first)",
-                "Distance to nearest ski lift",
-                "Stars [5->1]",
-                "Stars [1->5]",
-                "Star rating and price",
-                "Distance from city centre",
-                "Top reviewed"
-            ]
-        },
-
-        "simple": {
-            "title": "Extract hotel list pages only (no detail)",
-            "type": "boolean",
-            "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
-            "default": false
-        },
-        "useFilters": {
-            "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
-            "type": "boolean",
-            "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
-            "default": false
-        },
-        "startUrls": {
-            "title": "Start URLs",
+        "searchTerms": {
+            "title": "Do you want to add some search terms?",
             "type": "array",
-            "description": "URLs to start with instead of search query",
-            "editor": "requestListSources"
+            "prefill": ["Apify"],
+            "editor": "stringList",
+            "description": "If you add search terms, the scraper will find and extract tweets that mention those terms."
         },
-        "checkIn": {
-            "title": "Check-in date (yyyy-mm-dd)",
+        "searchMode": {
+            "title": "Do you want to choose the kind of content to scrape?",
+            "description": "This setting will change how the data is received by the scraper.",
+            "editor": "select",
             "type": "string",
-            "description": "Check-in date",
-            "default": "",
+            "prefill": "",
+            "enum": ["", "live", "user", "image", "video"],
+            "enumTitles": ["Top", "Latest", "People", "Photos", "Videos"]
+        },
+        "mode": {
+            "title": "What kinds of tweets do you want to scrape?",
+            "description": "You can choose to only scrape a user's own tweets or you can choose to also scrape the user's own tweets and the user's replies to other users.",
+            "type": "string",
+            "editor": "select",
+            "prefill": "replies",
+            "default": "replies",
+            "enumTitles": [
+                "Only own tweets",
+                "Own tweets and replies to other users"
+            ],
+            "enum": ["own", "replies"]
+        },
+        "tweetsDesired": {
+            "title": "Set the maximum number of tweets",
+            "type": "integer",
+            "description": "This value lets you set the maximum number of tweets to retrieve. Twitter has a default limit of around 3,200 tweets. Check the README for workarounds.",
+            "maximum": 3300,
+            "prefill": 100,
+            "default": 100
+        },
+        "addUserInfo": {
+            "title": "Add user information",
+            "description": "Appends an object to each tweet containing the user information. You can decrease the size of your dataset by turning this off.",
+            "default": true,
+            "type": "boolean",
+            "editor": "checkbox"
+        },
+        "handle": {
+          "title": "Do you want to add some Twitter handles?",
+          "type": "array",
+          "description": "You can add the twitter handles of specific profiles you want to scrape. This is a shortcut so that you don't have to add full username URLs like https://twitter.com/username.",
+          "editor": "stringList",
+          "sectionCaption": "Do you want to scrape based on different input?",
+          "sectionDescription": "xxx"
+      },
+      "startUrls": {
+          "title": "Do you want to add Twitter URLs to tell the scraper where to start?",
+          "description": "You can enter URLs one by one. You can also link to or upload a text file with a list of URLs.",
+          "default": [],
+          "type": "array",
+          "editor": "requestListSources"
+      },
+      "toDate": {
+            "title": "Tweets newer than",
+            "description": "Scrape tweets newer than this date. You can use this in conjunction with 'Tweets older than' to create a limited time slice. ",
+            "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
+            "type": "string",
             "editor": "textfield",
-            "sectionCaption": "Select the dates (neccessary if you want to get prices and other info)"
+            "sectionCaption": "Do you want to set specific dates?",
+            "sectionDescription": "You can choose to scrape only tweets older or newer than a specific date. You can use YYYY-MM-DD format or just relative dates like '1 month' or '2 days'."
         },
-        "checkOut": {
-            "title": "Check-out date (yyyy-mm-dd)",
+        "fromDate": {
+            "title": "Tweets older than",
+            "description": "Scrape tweets from this date and before. You can use this in conjunction with 'Tweets newer than'to create a limited time slice.",
             "type": "string",
-            "description": "Check-out date",
-            "default": "",
+            "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
             "editor": "textfield"
-        },
-        "minScore": {
-            "title": "Minimum rating",
-            "type": "string",
-            "description": "Minimum rating of a hotel",
-            "editor": "textfield",
-            "sectionCaption": "Select rating and price range"
-        },
-        "minMaxPrice": {
-            "title": "Price range",
-            "type": "string",
-            "description": "Minimum-maximum price range",
-            "default": "none",
-            "enum": ["none", "0-50", "50-100", "100-150", "150-200", "200+"],
-            "enumTitles": [
-                "none",
-                "0 - € 50",
-                "€ 50 - € 100",
-                "€ 100 - € 150",
-                "€ 150 - € 200",
-                "€ 200 +"
-            ]
-        },
-        "rooms": {
-            "sectionCaption": "Set numbers of rooms and people",
-            "title": "Number of rooms",
-            "type": "integer",
-            "description": "Number of rooms for the search",
-            "default": 1,
-            "maximum": 50
-        },
-        "adults": {
-            "title": "Number of adults",
-            "type": "integer",
-            "description": "Number of adults for the search",
-            "default": 2,
-            "maximum": 50
-        },
-        "children": {
-            "title": "Number of children",
-            "type": "integer",
-            "description": "Number of children for the search",
-            "default": 0,
-            "maximum": 50
-        },
-        "currency": {
-            "sectionCaption": "Set currency and language",
-            "title": "Preferred currency",
-            "type": "string",
-            "description": "Currency code to be set on the site",
-            "prefill": "USD",
-            "enum": [
-                "ARS",
-                "AUD",
-                "AZN",
-                "BHD",
-                "BRL",
-                "BGN",
-                "CAD",
-                "XOF",
-                "CLP",
-                "CNY",
-                "COP",
-                "CZK",
-                "DKK",
-                "EGP",
-                "EUR",
-                "FJD",
-                "GEL",
-                "HKD",
-                "HUF",
-                "INR",
-                "IDR",
-                "ILS",
-                "JPY",
-                "JOD",
-                "KZT",
-                "KRW",
-                "KWD",
-                "MYR",
-                "MXN",
-                "MDL",
-                "NAD",
-                "TWD",
-                "NZD",
-                "NOK",
-                "OMR",
-                "PLN",
-                "GBP",
-                "QAR",
-                "RON",
-                "RUB",
-                "SAR",
-                "SGD",
-                "ZAR",
-                "SEK",
-                "CHF",
-                "THB",
-                "TRY",
-                "AED",
-                "USD",
-                "UAH"
-            ],
-            "enumTitles": [
-                "AR$ - Argentine peso",
-                "AUD - Australian dollar",
-                "AZN - Azerbaijan, New Manats",
-                "BHD - Bahrain dinar",
-                "R$ - Brazilian real",
-                "BGN - Bulgarian lev",
-                "CAD - Canadian dollar",
-                "XOF - CFA Franc BCEAO",
-                "CL$ - Chilean peso",
-                "CNY - Chinese yuan",
-                "COP - Colombian peso",
-                "Kč - Czech koruna",
-                "DKK - Danish krone",
-                "EGP - Egyptian pound",
-                "€ - Euro",
-                "FJD - Fijian dollar",
-                "GEL - Georgian lari",
-                "HK$ - Hong Kong Dollar",
-                "HUF - Hungarian forint",
-                "Rs. - Indian rupee",
-                "Rp - Indonesian rupiah",
-                "₪ - Israeli new sheqel",
-                "¥ - Japanese yen",
-                "JOD - Jordanian dinar",
-                "KZT - Kazakhstani tenge",
-                "KRW - Korean won",
-                "KWD - Kuwaiti dinar",
-                "MYR - Malaysian ringgit",
-                "MXN - Mexican peso",
-                "MDL - Moldovan leu",
-                "NAD - Namibian Dollar",
-                "TWD - New Taiwan Dollar",
-                "NZD - New Zealand dollar",
-                "NOK - Norwegian krone",
-                "OMR - Omani rial",
-                "zł - Polish zloty",
-                "£ - Pound sterling",
-                "QAR - Qatar riyal",
-                "lei - Romanian new leu",
-                "RUB - Russian Ruble",
-                "SAR - Saudi Arabian riyal",
-                "S$ - Singapore dollar",
-                "ZAR - South African rand",
-                "SEK - Swedish krona",
-                "CHF - Swiss franc",
-                "THB - Thai baht",
-                "TL - Turkish lira",
-                "AED - U.A.E. dirham",
-                "US$ - U.S. dollar",
-                "UAH - Ukraine Hryvnia"
-            ]
-        },
-        "language": {
-            "title": "Language",
-            "type": "string",
-            "description": "Language code to be set on the site",
-            "prefill": "en-us",
-            "enum": [
-                "en-gb",
-                "en-us",
-                "de",
-                "nl",
-                "fr",
-                "es",
-                "es-ar",
-                "ca",
-                "it",
-                "pt-pt",
-                "pt-br",
-                "no",
-                "fi",
-                "sv",
-                "da",
-                "cs",
-                "hu",
-                "ro",
-                "ja",
-                "zh-cn",
-                "zh-tw",
-                "pl",
-                "el",
-                "ru",
-                "tr",
-                "bg",
-                "ar",
-                "ko",
-                "he",
-                "lv",
-                "uk",
-                "id",
-                "ms",
-                "th",
-                "et",
-                "hr",
-                "lt",
-                "sk",
-                "sr",
-                "sl",
-                "vi",
-                "tl",
-                "is"
-            ],
-            "enumTitles": [
-                "English (UK)",
-                "English (US)",
-                "Deutsch",
-                "Nederlands",
-                "Français",
-                "Español",
-                "Español (AR)",
-                "Català",
-                "Italiano",
-                "Português (PT)",
-                "Português (BR)",
-                "Norsk",
-                "Suomi",
-                "Svenska",
-                "Dansk",
-                "Čeština",
-                "Magyar",
-                "Română",
-                "日本語",
-                "简体中文",
-                "繁體中文",
-                "Polski",
-                "Ελληνικά",
-                "Русский",
-                "Türkçe",
-                "Български",
-                "العربية",
-                "한국어",
-                "עברית",
-                "Latviski",
-                "Українська",
-                "Bahasa Indonesia",
-                "Bahasa Malaysia",
-                "ภาษาไทย",
-                "Eesti",
-                "Hrvatski",
-                "Lietuvių",
-                "Slovenčina",
-                "Srpski",
-                "Slovenščina",
-                "Tiếng Việt",
-                "Filipino",
-                "Íslenska"
-            ]
         },
         "proxyConfig": {
             "title": "Proxy configuration",
             "type": "object",
-            "description": "SHADER proxy group usually works the best if you have access to it.",
-            "prefill": { "useApifyProxy": true },
+            "description": "This is required if you want to use Apify Proxy.",
+            "prefill": {
+                "useApifyProxy": true
+            },
+            "default": {
+                "useApifyProxy": true
+            },
             "editor": "proxy",
-            "sectionCaption": "Proxy Configuration"
-        },
-        "testProxy": {
-            "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
-            "type": "boolean",
-            "description": "Before starting crawling, the crawler will try to find a proxy that's not blocked by Booking.",
-            "default": false
+            "sectionCaption": "Proxy configuration",
+            "sectionDescription": "Choose which proxies to use."
         },
         "extendOutputFunction": {
-            "title": "Extend output function",
+            "title": "Extend Output Function",
+            "description": "Add or remove properties on the output object or omit the output returning null",
             "type": "string",
-            "nullable": true,
-            "description": "Function that takes a JQuery handle ($) as argument and returns data that will be merged with the default output",
-            "prefill": "($) => { return {} }",
+            "default": "async ({ data, item, page, request, customData, Apify }) => {\n  return item;\n}",
+            "prefill": "async ({ data, item, page, request, customData, Apify }) => {\n  return item;\n}",
             "editor": "javascript",
-            "sectionCaption": "Extend output"
+            "sectionCaption": "Extend scraper functionality",
+            "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior to the scraper."
+        },
+        "extendScraperFunction": {
+            "title": "Extend Scraper Function",
+            "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
+            "type": "string",
+            "default": "async ({ page, request, addSearch, addProfile, _, addThread, addEvent, customData, Apify, signal, label }) => {\n \n}",
+            "prefill": "async ({ page, request, addSearch, addProfile, _, addThread, addEvent, customData, Apify, signal, label }) => {\n \n}",
+            "editor": "javascript"
+        },
+        "customData": {
+            "title": "Custom data",
+            "description": "Any data that you want to have available inside the Extend Output/Scraper Function",
+            "default": {},
+            "prefill": {},
+            "type": "object",
+            "editor": "json"
+        },
+        "handlePageTimeoutSecs": {
+            "title": "Max timeout seconds",
+            "description": "Max timeout for the handlePageFunction. Can be increased for long running processes",
+            "default": 5000,
+            "prefill": 5000,
+            "editor": "number",
+            "type": "integer"
+        },
+        "stealth": {
+            "title": "Stealth",
+            "description": "Enabling stealth allows to decrease the chance of your scrape being detected as an automated process. We recommend enabling this if you provide your login cookies.",
+            "default": false,
+            "type": "boolean",
+            "editor": "checkbox"
+        },
+        "maxRequestRetries": {
+            "title": "Max request retries",
+            "description": "Set the max request retries",
+            "default": 3,
+            "prefill": 3,
+            "type": "integer",
+            "editor": "number"
+        },
+        "maxIdleTimeoutSecs": {
+            "title": "Scrolling idle seconds",
+            "description": "Configures how many seconds of no data received will be considered done",
+            "default": 30,
+            "prefill": 30,
+            "type": "integer",
+            "editor": "number"
+        },
+        "debugLog": {
+            "title": "Debug log",
+            "description": "Enable debug log",
+            "default": false,
+            "type": "boolean",
+            "editor": "checkbox"
+        },
+        "initialCookies": {
+            "title": "Login cookies",
+            "type": "array",
+            "default": [],
+            "prefill": [],
+            "description": "Your login cookies will be used to bypass the login wall. Check the README for detailed instructions.",
+            "editor": "json",
+            "sectionCaption": "Login (optional)",
+            "sectionDescription": "You will have access to more data if you provide Twitter login information."
         }
     },
     "required": ["proxyConfig"]
-}
+  }
+  
