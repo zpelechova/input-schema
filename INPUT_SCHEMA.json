@@ -73,20 +73,13 @@
             "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
             "default": false
         },
-
-        "minScore": {
-            "title": "Minimum rating",
-            "type": "string",
-            "description": "Minimum rating of a hotel",
-            "editor": "textfield",
-            "sectionCaption": "Specify the filter"
-        },
         "checkIn": {
             "title": "Check-in date (yyyy-mm-dd)",
             "type": "string",
             "description": "Check-in date",
             "default": "",
-            "editor": "textfield"
+            "editor": "textfield",
+            "sectionCaption": "Select the date (neccessary if you want to get prices and other info)"
         },
         "checkOut": {
             "title": "Check-out date (yyyy-mm-dd)",
@@ -95,7 +88,15 @@
             "default": "",
             "editor": "textfield"
         },
+        "minScore": {
+            "title": "Minimum rating",
+            "type": "string",
+            "description": "Minimum rating of a hotel",
+            "editor": "textfield",
+            "sectionCaption": "Specify the filter"
+        },
         "rooms": {
+            "sectionCaption": "Set numbers of rooms and people",
             "title": "Number of rooms",
             "type": "integer",
             "description": "Number of rooms for the search",
@@ -117,6 +118,7 @@
             "maximum": 50
         },
         "currency": {
+            "sectionCaption": "Set currency and language",
             "title": "Preferred currency",
             "type": "string",
             "description": "Currency code to be set on the site",
@@ -323,6 +325,7 @@
             ]
         },
         "minMaxPrice": {
+            "sectionCaption": "Other filters",
             "title": "Price range",
             "type": "string",
             "description": "Minimum-maximum price range",
