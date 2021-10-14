@@ -18,7 +18,6 @@
             "default": "city",
             "enum": ["city", "region"],
             "enumTitles": ["City", "Region"],
-            "sectionCaption": "Filters"
         },
         "maxPages": {
             "title": "Maximum pagination pages",
