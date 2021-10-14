@@ -19,6 +19,29 @@
             "enum": ["city", "region"],
             "enumTitles": ["City", "Region"]
         },
+        
+        "propertyType": {
+            "title": "Property type",
+            "type": "string",
+            "description": "Property type filter",
+            "default": "none",
+            "enum": [
+                "none",
+                "Hotels",
+                "Apartments",
+                "Hostels",
+                "Guest houses",
+                "Homestays",
+                "Bed and breakfasts",
+                "Holiday homes",
+                "Boats",
+                "Villas",
+                "Motels",
+                "Holiday parks",
+                "Campsites",
+                "Luxury tents"
+            ]
+        },
         "maxPages": {
             "title": "Maximum pagination pages",
             "type": "integer",
@@ -78,7 +101,7 @@
             "description": "Check-in date",
             "default": "",
             "editor": "textfield",
-            "sectionCaption": "Select the date (neccessary if you want to get prices and other info)"
+            "sectionCaption": "Select the dates (neccessary if you want to get prices and other info)"
         },
         "checkOut": {
             "title": "Check-out date (yyyy-mm-dd)",
@@ -92,7 +115,7 @@
             "type": "string",
             "description": "Minimum rating of a hotel",
             "editor": "textfield",
-            "sectionCaption": "Rating and price range"
+            "sectionCaption": "Select rating and price range"
         },
         "minMaxPrice": {
             "title": "Price range",
@@ -336,28 +359,6 @@
                 "Tiếng Việt",
                 "Filipino",
                 "Íslenska"
-            ]
-        },
-        "propertyType": {
-            "title": "Property type",
-            "type": "string",
-            "description": "Property type filter",
-            "default": "none",
-            "enum": [
-                "none",
-                "Hotels",
-                "Apartments",
-                "Hostels",
-                "Guest houses",
-                "Homestays",
-                "Bed and breakfasts",
-                "Holiday homes",
-                "Boats",
-                "Villas",
-                "Motels",
-                "Holiday parks",
-                "Campsites",
-                "Luxury tents"
             ]
         },
         "proxyConfig": {
