@@ -17,7 +17,8 @@
     "description": "This setting will change how the data is received by the scraper.",
     "editor": "select",
     "type": "string",
-    "prefill": "",
+    "prefill": "Top",
+    "default": "Top",
     "enum": [
     "",
     "live",
