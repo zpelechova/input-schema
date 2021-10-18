@@ -40,7 +40,7 @@
             "minLength": 0,
             "maxLength": 16,
             "nullable": true,
-            "sectionCaption": "Videos to:"
+            "sectionCaption": "Date range"
         },
         "postsFromDate": {
             "title": "Videos from",
@@ -50,8 +50,7 @@
             "pattern": "^(today|yesterday|\\d+\\s?(minute|second|day|hour|month|year|week)s?|\\d{4}\\-\\d{2}\\-\\d{2}(\\s\\d{2}\\:\\d{2}\\:\\d{2})?)$",
             "minLength": 0,
             "maxLength": 16,
-            "nullable": true,
-            "sectionCaption": "Videos from:"
+            "nullable": true
         },
         "downloadSubtitles": {
             "title" : "Download subtitles",
@@ -59,11 +58,6 @@
             "description" : "If set to true, we will also download subtitles for given video and convert it to SRT format",
             "sectionCaption": "Subtitles",
             "sectionDescription": "Use this if you want to download video subtitles as well."
-        },
-        "saveSubsToKVS": {
-            "title" : "Save downloaded subtitles to Key Value Store",
-            "type": "boolean",
-            "description" : "If set to true, we will save downloaded (and converted to .srt format) subtitles to Key Value Store in format { subtitles: srt_text }. 'downloadSubtitles' must be set to true for this take an effect"
         },
         "subtitlesLanguage": {
             "title" : "Download subtitles in selected language",
@@ -78,6 +72,11 @@
             "title": "Prefer automatically generated subtitles before the user generated ones.",
             "description": "If set to `true` and language is provided, we download automatically generated subtitles rather then user ones. If no language is provided, this settings takes no effect",
             "type": "boolean"
+        },
+        "saveSubsToKVS": {
+            "title" : "Save downloaded subtitles to Key Value Store",
+            "type": "boolean",
+            "description" : "If set to true, we will save downloaded (and converted to .srt format) subtitles to Key Value Store in format { subtitles: srt_text }. 'downloadSubtitles' must be set to true for this take an effect"
         },
         "maxComments": {
             "title" : "Number of comments",
