@@ -39,7 +39,6 @@
     "description": "You can choose to only scrape a user's own tweets or you can choose to also scrape the user's own tweets and the user's replies to other users.",
     "type": "string",
     "editor": "select",
-    "prefill": "replies",
     "default": "replies",
     "enumTitles": [
     "Tweets only",
