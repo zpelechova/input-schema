@@ -78,10 +78,10 @@
         },
 
         "simple": {
-            "title": "Extract hotel list pages only (no detail)",
+            "title": "Extract only basic information (no detail)",
             "type": "boolean",
             "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
-            "default": false
+            "default": true
         },
         "useFilters": {
             "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
@@ -90,9 +90,9 @@
             "default": false
         },
         "startUrls": {
-            "title": "Start URLs",
+            "title": "Or use a start URLs instead",
             "type": "array",
-            "description": "URLs to start with instead of search query",
+            "description": "URLs to start with instead of search query. It is better to use a simple URL and filter other options in filters here.",
             "editor": "requestListSources"
         },
         "checkIn": {
