@@ -55,8 +55,7 @@
     "type": "integer",
     "description": "This value lets you set the maximum number of tweets to retrieve. Twitter has a default limit of around 3,200 tweets. Check the README for workarounds.",
     "maximum": 3300,
-    "prefill": 100,
-    "default": 100
+    "prefill": 50
     },
     "addUserInfo": {
     "title": "Add user information",
