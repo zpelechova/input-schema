@@ -17,7 +17,8 @@
     "description": "This setting will change how the data is received by the scraper.",
     "editor": "select",
     "type": "string",
-    "prefill": "",
+    "prefill": "Top",
+    "default": "",
     "enum": [
     "",
     "live",
@@ -38,11 +39,10 @@
     "description": "You can choose to only scrape a user's own tweets or you can choose to also scrape the user's own tweets and the user's replies to other users.",
     "type": "string",
     "editor": "select",
-    "prefill": "replies",
     "default": "replies",
     "enumTitles": [
-    "Only own tweets",
-    "Own tweets and replies to other users"
+    "Tweets only",
+    "Tweets and replies to other users"
     ],
     "enum": [
     "own",
@@ -54,8 +54,7 @@
     "type": "integer",
     "description": "This value lets you set the maximum number of tweets to retrieve. Twitter has a default limit of around 3,200 tweets. Check the README for workarounds.",
     "maximum": 3300,
-    "prefill": 100,
-    "default": 100
+    "prefill": 50
     },
     "addUserInfo": {
     "title": "Add user information",
