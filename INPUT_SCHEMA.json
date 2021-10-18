@@ -41,8 +41,8 @@
     "prefill": "replies",
     "default": "replies",
     "enumTitles": [
-    "Only own tweets",
-    "Own tweets and replies to other users"
+    "Tweets only",
+    "Tweets and replies to other users"
     ],
     "enum": [
     "own",
