@@ -28,14 +28,15 @@
           "description": "Terms for fulltext search in Aliexpress page",
           "editor": "stringList",
           "uniqueItems": true,
-          "sectionCaption": "Or use search term instead of URL"
+          "sectionCaption": "Use search term instead of URL"
       },
       "searchInSubcategories": {
           "title": "Search in subcategories",
           "type": "boolean",
           "description": "When you add category url into startUrls, you can handle if actor scrape products by subcategories or only by category in url",
           "editor": "checkbox",
-          "default": true
+          "default": true,
+          "sectionCaption": "Other filters and specifications (subcategories, language, shipping, currency)"
       },
       "language":{
           "title": "Language",
@@ -46,8 +47,7 @@
           "prefill": "en_US",
           "enum": ["en_US","ru_RU","pt_BR","es_ES","fr_FR","pl_PL","iw_IL","it_IT","tr_TR","de_DE","ko_KR","ar_MA","ja_JP","nl_NL","th_TH","vi_VN","in_ID"],
           "enumTitles": ["English","Russian","Portuguese","Spanish","French","Polish","Israel","Italian","Turkish","German","Korean","Arabic","Japanese","Dutch","Thai","Vietnamese","Indonesia"],
-          "nullable": true,
-          "sectionCaption": "Other filters and specifications"
+          "nullable": true
       },
       "shipTo":{
           "title": "Shipping to",
@@ -77,7 +77,7 @@
           "description": "Include description for products. It might slow the process a bit",
           "editor": "checkbox",
           "default": false,
-          "sectionCaption": "Scraping additional information (description, feedback, questions"
+          "sectionCaption": "Scraping additional information (description, feedback, questions)"
       },
       "maxFeedbacks": {
           "title": "Max feedback count",
