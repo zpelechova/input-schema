@@ -10,6 +10,20 @@
             "prefill": "New York",
             "editor": "textfield"
         },
+        "maxPages": {
+            "title": "Maximum pagination pages",
+            "type": "integer",
+            "description": "Number of pagination pages to be crawled",
+            "maximum": 1000000,
+            "prefill": 2
+        },
+        "startUrls": {
+            "title": "Use a direct start URL instead of the search term",
+            "type": "array",
+            "description": "URLs to start with instead of search query. It is better to use a simple URL and filter other options in filters here.",
+            "editor": "requestListSources",
+            "sectionCaption": "Use a specific URL instead of sear term"
+        },
         "destType": {
             "title": "Destination type",
             "type": "string",
@@ -17,7 +31,8 @@
             "description": "Type of the destination",
             "default": "city",
             "enum": ["city", "region"],
-            "enumTitles": ["City", "Region"]
+            "enumTitles": ["City", "Region"],
+            "sectionCaption": "Filter the results if you want to"
         },
         "propertyType": {
             "title": "Property type",
@@ -40,13 +55,6 @@
                 "Campsites",
                 "Luxury tents"
             ]
-        },
-        "maxPages": {
-            "title": "Maximum pagination pages",
-            "type": "integer",
-            "description": "Number of pagination pages to be crawled",
-            "maximum": 1000000,
-            "prefill": 2
         },
         "sortBy": {
             "title": "Order results by",
@@ -86,12 +94,6 @@
             "type": "boolean",
             "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
             "default": false
-        },
-        "startUrls": {
-            "title": "Use a direct start URL instead of the search term",
-            "type": "array",
-            "description": "URLs to start with instead of search query. It is better to use a simple URL and filter other options in filters here.",
-            "editor": "requestListSources"
         },
         "checkIn": {
             "title": "Check-in date (yyyy-mm-dd)",
