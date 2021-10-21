@@ -100,7 +100,7 @@
           "default": { "useApifyProxy": true },
           "prefill": { "useApifyProxy": true },
           "editor": "proxy",
-          "sectionCaption": "Advanced configuration (proxy, extend output function"
+          "sectionCaption": "Advanced configuration (proxy, extend output function)"
       },
       "extendOutputFunction": {
           "title": "Extend output function",
