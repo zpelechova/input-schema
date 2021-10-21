@@ -23,6 +23,12 @@
             "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
             "default": true
         },
+        "useFilters": {
+            "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
+            "type": "boolean",
+            "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
+            "default": false
+        },
         "startUrls": {
             "title": "Start URL",
             "type": "array",
@@ -38,7 +44,7 @@
             "default": "city",
             "enum": ["city", "region"],
             "enumTitles": ["City", "Region"],
-            "sectionCaption": "Select filters of your search (destination type, property type, sorting...)"
+            "sectionCaption": "Select filters for your search (destination type, property type, sorting)"
         },
         "propertyType": {
             "title": "Property type",
@@ -89,12 +95,6 @@
                 "Top reviewed"
             ]
         },
-        "useFilters": {
-            "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
-            "type": "boolean",
-            "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
-            "default": false
-        },
         "checkIn": {
             "title": "Check-in date (yyyy-mm-dd)",
             "type": "string",
@@ -133,7 +133,7 @@
             ]
         },
         "rooms": {
-            "sectionCaption": "Select numbers of rooms and people",
+            "sectionCaption": "Select number of rooms and people",
             "title": "Number of rooms",
             "type": "integer",
             "description": "Number of rooms for the search",
