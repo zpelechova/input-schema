@@ -10,6 +10,32 @@
             "prefill": "New York",
             "editor": "textfield"
         },
+        "maxPages": {
+            "title": "Maximum pagination pages",
+            "type": "integer",
+            "description": "Number of pagination pages to be crawled",
+            "maximum": 1000000,
+            "prefill": 2
+        },
+        "simple": {
+            "title": "Extract only basic information (no detail)",
+            "type": "boolean",
+            "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
+            "default": true
+        },
+        "useFilters": {
+            "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
+            "type": "boolean",
+            "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
+            "default": false
+        },
+        "startUrls": {
+            "title": "Start URL",
+            "type": "array",
+            "description": "URLs to start with instead of search query. It is better to use a simple URL and filter other options in filters here.",
+            "editor": "requestListSources",
+            "sectionCaption": "Use a direct start URL instead of the search term"
+        },
         "destType": {
             "title": "Destination type",
             "type": "string",
@@ -17,9 +43,9 @@
             "description": "Type of the destination",
             "default": "city",
             "enum": ["city", "region"],
-            "enumTitles": ["City", "Region"]
+            "enumTitles": ["City", "Region"],
+            "sectionCaption": "Select filters for your search (destination type, property type, sorting)"
         },
-        
         "propertyType": {
             "title": "Property type",
             "type": "string",
@@ -41,13 +67,6 @@
                 "Campsites",
                 "Luxury tents"
             ]
-        },
-        "maxPages": {
-            "title": "Maximum pagination pages",
-            "type": "integer",
-            "description": "Number of pagination pages to be crawled",
-            "maximum": 1000000,
-            "prefill": 2
         },
         "sortBy": {
             "title": "Order results by",
@@ -76,32 +95,13 @@
                 "Top reviewed"
             ]
         },
-
-        "simple": {
-            "title": "Extract only basic information (no detail)",
-            "type": "boolean",
-            "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
-            "default": true
-        },
-        "useFilters": {
-            "title": "Circumvent 1000 results limitation (uses criteria filters, slower)",
-            "type": "boolean",
-            "description": "The crawler will enqueue all the different criteria filtered pages, this will overcome the 1000 results limit, but the scrape will take significantly longer.",
-            "default": false
-        },
-        "startUrls": {
-            "title": "Or use a start URLs instead",
-            "type": "array",
-            "description": "URLs to start with instead of search query. It is better to use a simple URL and filter other options in filters here.",
-            "editor": "requestListSources"
-        },
         "checkIn": {
             "title": "Check-in date (yyyy-mm-dd)",
             "type": "string",
             "description": "Check-in date",
             "default": "",
             "editor": "textfield",
-            "sectionCaption": "Select the dates (neccessary if you want to get prices and other info)"
+            "sectionCaption": "Select dates (neccessary if you want to get prices and info about rooms)"
         },
         "checkOut": {
             "title": "Check-out date (yyyy-mm-dd)",
@@ -133,7 +133,7 @@
             ]
         },
         "rooms": {
-            "sectionCaption": "Set numbers of rooms and people",
+            "sectionCaption": "Select number of rooms and people",
             "title": "Number of rooms",
             "type": "integer",
             "description": "Number of rooms for the search",
@@ -155,7 +155,7 @@
             "maximum": 50
         },
         "currency": {
-            "sectionCaption": "Set currency and language",
+            "sectionCaption": "Select currency and language",
             "title": "Preferred currency",
             "type": "string",
             "description": "Currency code to be set on the site",
