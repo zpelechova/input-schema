@@ -8,9 +8,17 @@
             "type": "string",
             "description": "What to search Kickstarter for",
             "editor": "textfield",
-            "prefill": "gadgets"
+            "prefill": "Gadgets"
+        },
+        "maxResults": {
+            "title": "Maximum results",
+            "type": "integer",
+            "description": "Limit number of results",
+            "minimum": 0,
+            "prefill": 50
         },
         "category": {
+            "sectionCaption": "Possible filters",
             "title": "Category",
             "type": "string",
             "description": "Category to search in",
@@ -193,7 +201,7 @@
             "title": "Location",
             "type": "string",
             "description": "Location to search around, can be either string or Numeric ID of the location",
-            "prefill": "",
+            "prefill": "United States",
             "editor": "textfield"
         },
         "status": {
@@ -237,18 +245,13 @@
             "enum": ["newest", "popularity", "end_date", "most_funded", "most_backed"],
             "editor": "select"
         },
-        "maxResults": {
-            "title": "Maximum results",
-            "type": "integer",
-            "description": "Limit number of results",
-            "minimum": 0
-        },
         "datasetName": {
             "title": "Dataset name",
             "type": "string",
             "description": "Use this if you want the data to be written into named dataset, setting this will overwrite the data with each run",
             "default": "",
-            "editor": "textfield"
+            "editor": "textfield",
+            "sectionCaption": "Advanced options"
         },
         "proxyConfig": {
             "title": "Proxy configuration",
@@ -266,4 +269,5 @@
     "required": [
         "proxyConfig"
     ]
-}
+  }
+  
