@@ -191,13 +191,20 @@
           "example": "en",
           "prefill": "en"
       },
+      "exportPlaceUrls": {
+          "title": "Export place URLs only (skips place details)",
+          "type": "boolean",
+          "description": "Scraper will return only place URLs without crawling their details.",
+          "default": false,
+          "sectionCaption": "Output configuration",
+          "sectionDescription": "You can set what extra information you would like extracted. For maximum efficiency, the default setup doesn't include reviews or images. If you need these, just increase the maximum count for them."
+
+      },
       "includeHistogram": {
           "title": "Include popular times",
           "type": "boolean",
           "description": "If checked, the crawler scrapes popular times for all places. You can speed up crawling if you disable this.",
-          "default": false,
-          "sectionCaption": "Output configuration",
-          "sectionDescription": "You can set what extra information you would like extracted. For maximum efficiency, the default setup doesn't include reviews or images. If you need these, just increase the maximum count for them."
+          "default": false
       },
       "includeOpeningHours": {
           "title": "Include opening hours",
@@ -267,13 +274,6 @@
               "Only translated"
           ]
       },
-      "exportPlaceUrls": {
-          "title": "Export place URLs only (skips place details)",
-          "type": "boolean",
-          "description": "Scraper will return only place URLs without crawling their details.",
-          "default": false
-      },
-
       "scrapeReviewerName": {
         "title": "Reviewer name",
         "type": "boolean",
