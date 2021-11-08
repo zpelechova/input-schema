@@ -523,7 +523,7 @@
               "Zambia",
               "Zimbabwe"
           ],
-          "sectionCaption": "Setting options",
+          "sectionCaption": "Additional options (country, language, UULE code)",
           "sectionDescription": "Here you can specify further parameters of the scrape. However we worked hard to set the best options for you already."
 
       },
@@ -718,7 +718,10 @@
           "description": "The maximum number of search results pages the crawler will load in parallel. A higher number means you will get your results faster, but also it will burn through your available proxies quicker.",
           "default": 10,
           "maximum": 100,
-          "minimum": 1
+          "minimum": 1,
+          "sectionCaption": "Advanced options (for developers)",
+          "sectionDescription": "Here you can specify further parameters of the scrape. However we worked hard to set the best options for you already."
+
       },
       "saveHtml": {
           "title": "Save HTML to dataset",
