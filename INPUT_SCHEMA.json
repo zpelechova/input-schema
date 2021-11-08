@@ -12,6 +12,26 @@
           "editor": "textarea",
           "pattern": "[^\\s]+"
       },
+      "resultsPerPage": {
+          "title": "Results per page",
+          "type": "integer",
+          "description": "Number of search results per page. By default, Google Search returns 10 results. The allowed values are: <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code> and <code>100</code>.<br><br>This setting only applies to <strong>Search queries</strong>, but not to <strong>URLs</strong>.",
+          "maximum": 100,
+          "minimum": 1
+      },
+      "maxPagesPerQuery": {
+          "title": "Max pages per query",
+          "type": "integer",
+          "description": "The maximum number of search result pages crawled for each search query or URL. Note that a value greater than one might significantly slow down the actor.",
+          "default": 1,
+          "minimum": 1
+      },
+      "mobileResults": {
+          "title": "Mobile results",
+          "type": "boolean",
+          "description": "If checked, the crawler will return results for the mobile version of the Google Search. By default, desktop results are returned.",
+          "default": false
+      },
       "countryCode": {
           "title": "Country",
           "type": "string",
@@ -688,34 +708,15 @@
           "description": "The code for geolocation of search results. It's passed to Google Search as the <code>uule</code> URL query parameter. You can use the <a href='https://padavvan.github.io/' target='_blank'>UULE code generator</a>. Learn more about <a href='https://moz.com/ugc/geolocation-the-ultimate-tip-to-emulate-local-search' target='_blank'>emulating local search</a>. <br><br>This setting only applies to <strong>Search queries</strong>, but not to <strong>URLs</strong>.",
           "editor": "textfield"
       },
-      "resultsPerPage": {
-          "title": "Results per page",
-          "type": "integer",
-          "description": "Number of search results per page. By default, Google Search returns 10 results. The allowed values are: <code>10</code>, <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code> and <code>100</code>.<br><br>This setting only applies to <strong>Search queries</strong>, but not to <strong>URLs</strong>.",
-          "maximum": 100,
-          "minimum": 1
-      },
-      "maxPagesPerQuery": {
-          "title": "Max pages per query",
-          "type": "integer",
-          "description": "The maximum number of search result pages crawled for each search query or URL. Note that a value greater than one might significantly slow down the actor.",
-          "default": 1,
-          "minimum": 1
-      },
-      "customDataFunction": {
-          "title": "Custom data function",
-          "type": "string",
-          "description": "Custom JavaScript function to extract additional attributes from the HTML of the result pages. The function accepts the same parameters as the <code>handlePageFunction</code> of the <a href='https://sdk.apify.com/docs/typedefs/cheerio-crawler-options'>CheerioCrawler</a> in Apify SDK. The return value of the function is saved to the results as the <code>customData</code> property.",
-          "editor": "javascript",
-          "prefill": "async ({ input, $, request, response, html }) => {\n  return {\n    pageTitle: $('title').text(),\n  };\n};"
-      },
       "maxConcurrency": {
           "title": "Max concurrency",
           "type": "integer",
           "description": "The maximum number of search results pages the crawler will load in parallel. A higher number means you will get your results faster, but also it will burn through your available proxies quicker.",
           "default": 10,
           "maximum": 100,
-          "minimum": 1
+          "minimum": 1,
+          "sectionCaption": "Setting options",
+          "sectionDescription": "Here you can specify further parameters of the scrape. However we worked hard to set the best options for you already."
       },
       "saveHtml": {
           "title": "Save HTML to dataset",
@@ -730,17 +731,18 @@
           "description": "If checked, the HTML of the Google Search results pages will be stored to the default key-value store and links to the files stored to the dataset under the <code>htmlSnapshotUrl</code> property. This is useful for debugging, since you can easily view the the pages in browser, but use of this feature has some performance penalty.",
           "default": false
       },
-      "mobileResults": {
-          "title": "Mobile results",
-          "type": "boolean",
-          "description": "If checked, the crawler will return results for the mobile version of the Google Search. By default, desktop results are returned.",
-          "default": false
-      },
       "includeUnfilteredResults": {
           "title": "Include unfiltered results",
           "type": "boolean",
           "description": "If checked, the lower quality results that Google normally filters out will be included. Usually it is few hundred extra results.",
           "default": false
+      },
+      "customDataFunction": {
+          "title": "Custom data function",
+          "type": "string",
+          "description": "Custom JavaScript function to extract additional attributes from the HTML of the result pages. The function accepts the same parameters as the <code>handlePageFunction</code> of the <a href='https://sdk.apify.com/docs/typedefs/cheerio-crawler-options'>CheerioCrawler</a> in Apify SDK. The return value of the function is saved to the results as the <code>customData</code> property.",
+          "editor": "javascript",
+          "prefill": "async ({ input, $, request, response, html }) => {\n  return {\n    pageTitle: $('title').text(),\n  };\n};"
       }
   },
   "required": []
