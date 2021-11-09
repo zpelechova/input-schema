@@ -30,13 +30,14 @@
           "type": "string",
           "description": "Email address where you want to get the notification",
           "editor": "textfield",
-          "example": "myemail@gmail.com"
+          "prefill": "my.email@gmail.com"
       },
       "sendNotificationText": {
           "title": "Notification Text",
           "type": "string",
           "description": "Optional text to include in the email notification.",
-          "editor": "textfield"
+          "editor": "textfield",
+          "prefill": "Hey there, the content has changed!"
       },
       "informOnError": {
           "title": "Email in case of error",
@@ -53,6 +54,9 @@
           "default": {
               "useApifyProxy": true
           },
+          "prefill": {
+            "useApifyProxy": true
+        },
           "description": "Select a proxy if the target website is blocking your access.",
           "editor": "proxy",
           "sectionCaption": "Proxy and browser configuration",
