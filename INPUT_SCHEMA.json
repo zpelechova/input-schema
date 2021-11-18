@@ -359,12 +359,12 @@
             "maximum": 50
         },
         "proxyConfig": {
-            "title": "Advanced options (Proxy configuration, extend output)",
+            "title": "Proxy Configuration",
             "type": "object",
             "description": "SHADER proxy group usually works the best if you have access to it.",
             "prefill": { "useApifyProxy": true },
             "editor": "proxy",
-            "sectionCaption": "Proxy Configuration"
+            "sectionCaption": "Advanced options (Proxy configuration, extend output)"
         },
         "testProxy": {
             "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
