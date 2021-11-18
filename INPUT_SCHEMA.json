@@ -44,7 +44,7 @@
             "default": "city",
             "enum": ["city", "region"],
             "enumTitles": ["City", "Region"],
-            "sectionCaption": "Select filters for your search (destination type, property type, sorting, rating)"
+            "sectionCaption": "Select filters for your search (destination type, property type, sorting, rating, currency, language)"
         },
         "propertyType": {
             "title": "Property type",
@@ -102,7 +102,6 @@
             "editor": "textfield"
         },
         "currency": {
-            "sectionCaption": "Select currency and language",
             "title": "Preferred currency",
             "type": "string",
             "description": "Currency code to be set on the site",
