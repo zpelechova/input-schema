@@ -322,21 +322,6 @@
             "default": "",
             "editor": "textfield"
         },
-        "minMaxPrice": {
-            "title": "Price range",
-            "type": "string",
-            "description": "Minimum-maximum price range",
-            "default": "none",
-            "enum": ["none", "0-50", "50-100", "100-150", "150-200", "200+"],
-            "enumTitles": [
-                "none",
-                "0 - € 50",
-                "€ 50 - € 100",
-                "€ 100 - € 150",
-                "€ 150 - € 200",
-                "€ 200 +"
-            ]
-        },
         "rooms": {
             "title": "Number of rooms",
             "type": "integer",
@@ -358,13 +343,28 @@
             "default": 0,
             "maximum": 50
         },
+        "minMaxPrice": {
+            "title": "Price range",
+            "type": "string",
+            "description": "Minimum-maximum price range",
+            "default": "none",
+            "enum": ["none", "0-50", "50-100", "100-150", "150-200", "200+"],
+            "enumTitles": [
+                "none",
+                "0 - € 50",
+                "€ 50 - € 100",
+                "€ 100 - € 150",
+                "€ 150 - € 200",
+                "€ 200 +"
+            ]
+        },
         "proxyConfig": {
             "title": "Proxy Configuration",
             "type": "object",
             "description": "SHADER proxy group usually works the best if you have access to it.",
             "prefill": { "useApifyProxy": true },
             "editor": "proxy",
-            "sectionCaption": "Advanced options (Proxy configuration, extend output)"
+            "sectionCaption": "Advanced options (proxy configuration, extend output)"
         },
         "testProxy": {
             "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
