@@ -99,8 +99,7 @@
             "title": "Minimum rating",
             "type": "string",
             "description": "Minimum rating of a hotel",
-            "editor": "textfield",
-            "sectionCaption": "Select rating and price range"
+            "editor": "textfield"
         },
         "currency": {
             "sectionCaption": "Select currency and language",
@@ -340,7 +339,6 @@
             ]
         },
         "rooms": {
-            "sectionCaption": "Select number of rooms and people",
             "title": "Number of rooms",
             "type": "integer",
             "description": "Number of rooms for the search",
