@@ -359,7 +359,7 @@
             "maximum": 50
         },
         "proxyConfig": {
-            "title": "Proxy configuration",
+            "title": "Advanced options (Proxy configuration, extend output)",
             "type": "object",
             "description": "SHADER proxy group usually works the best if you have access to it.",
             "prefill": { "useApifyProxy": true },
@@ -378,8 +378,7 @@
             "nullable": true,
             "description": "Function that takes a JQuery handle ($) as argument and returns data that will be merged with the default output",
             "prefill": "($) => { return {} }",
-            "editor": "javascript",
-            "sectionCaption": "Extend output"
+            "editor": "javascript"
         }
     },
     "required": ["proxyConfig"]
