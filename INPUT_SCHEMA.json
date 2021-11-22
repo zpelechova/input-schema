@@ -16,14 +16,14 @@
             "type": "array",
             "description": "Locations that will be searched for each search term.",
             "editor": "stringList",
-            "prefill": ["NYC"]
+            "prefill": ["New York"]
         },
         "searchLimit": {
             "title": "Search results limit",
             "type": "integer",
             "description": "How many search results (eq. Yelp bussinesses) should be processed per search query",
             "editor": "number",
-            "default": 10,
+            "prefill": 10,
             "minimum": 1,
             "maximum": 999999
         },
@@ -43,8 +43,7 @@
             "type": "integer",
             "minimum": 0,
             "unit": "per business",
-            "prefill": 10,
-            "default": 10,
+            "prefill": 1,
             "editor": "number",
             "sectionCaption": "Scraping images and reviews",
             "sectionDescription": "Warning! Reviewer name and Reviewer URL contain personal data. Personal data is protected by GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
@@ -55,9 +54,10 @@
             "description": "How many reviews should be scraped per business",
             "editor": "number",
             "unit": "per business",
-            "default": 20,
+            "prefill": 5,
             "minimum": 0,
-            "maximum": 999999        },
+            "maximum": 999999
+        },
         "scrapeReviewerName": {
             "title": "Reviewer name",
             "type": "boolean",
