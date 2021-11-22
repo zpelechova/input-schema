@@ -1,5 +1,5 @@
 {
-    "title": "Booking Crawler input",
+    "title": "Booking scraper input",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
@@ -20,7 +20,7 @@
         "simple": {
             "title": "Extract only basic information (no detail)",
             "type": "boolean",
-            "description": "The crawler will get only the data available on the list page and not go to the hotel detail page.",
+            "description": "The crawler will get only the data available on the list page and not go to the hotel detail page. ",
             "default": true
         },
         "useFilters": {
@@ -44,7 +44,7 @@
             "default": "city",
             "enum": ["city", "region"],
             "enumTitles": ["City", "Region"],
-            "sectionCaption": "Select filters for your search (destination type, property type, sorting)"
+            "sectionCaption": "Select filters for your search (destination type, property type, sorting, rating, currency, language)"
         },
         "propertyType": {
             "title": "Property type",
@@ -95,67 +95,13 @@
                 "Top reviewed"
             ]
         },
-        "checkIn": {
-            "title": "Check-in date (yyyy-mm-dd)",
-            "type": "string",
-            "description": "Check-in date",
-            "default": "",
-            "editor": "textfield",
-            "sectionCaption": "Select dates (neccessary if you want to get prices and info about rooms)"
-        },
-        "checkOut": {
-            "title": "Check-out date (yyyy-mm-dd)",
-            "type": "string",
-            "description": "Check-out date",
-            "default": "",
-            "editor": "textfield"
-        },
         "minScore": {
             "title": "Minimum rating",
             "type": "string",
             "description": "Minimum rating of a hotel",
-            "editor": "textfield",
-            "sectionCaption": "Select rating and price range"
-        },
-        "minMaxPrice": {
-            "title": "Price range",
-            "type": "string",
-            "description": "Minimum-maximum price range",
-            "default": "none",
-            "enum": ["none", "0-50", "50-100", "100-150", "150-200", "200+"],
-            "enumTitles": [
-                "none",
-                "0 - € 50",
-                "€ 50 - € 100",
-                "€ 100 - € 150",
-                "€ 150 - € 200",
-                "€ 200 +"
-            ]
-        },
-        "rooms": {
-            "sectionCaption": "Select number of rooms and people",
-            "title": "Number of rooms",
-            "type": "integer",
-            "description": "Number of rooms for the search",
-            "default": 1,
-            "maximum": 50
-        },
-        "adults": {
-            "title": "Number of adults",
-            "type": "integer",
-            "description": "Number of adults for the search",
-            "default": 2,
-            "maximum": 50
-        },
-        "children": {
-            "title": "Number of children",
-            "type": "integer",
-            "description": "Number of children for the search",
-            "default": 0,
-            "maximum": 50
+            "editor": "textfield"
         },
         "currency": {
-            "sectionCaption": "Select currency and language",
             "title": "Preferred currency",
             "type": "string",
             "description": "Currency code to be set on the site",
@@ -361,13 +307,64 @@
                 "Íslenska"
             ]
         },
+        "checkIn": {
+            "title": "Check-in date (yyyy-mm-dd)",
+            "type": "string",
+            "description": "Check-in date",
+            "default": "",
+            "editor": "textfield",
+            "sectionCaption": "Select filters connected with dates of the stay (neccessary if you want to get prices and info about rooms)"
+        },
+        "checkOut": {
+            "title": "Check-out date (yyyy-mm-dd)",
+            "type": "string",
+            "description": "Check-out date",
+            "default": "",
+            "editor": "textfield"
+        },
+        "rooms": {
+            "title": "Number of rooms",
+            "type": "integer",
+            "description": "Number of rooms for the search",
+            "default": 1,
+            "maximum": 50
+        },
+        "adults": {
+            "title": "Number of adults",
+            "type": "integer",
+            "description": "Number of adults for the search",
+            "default": 2,
+            "maximum": 50
+        },
+        "children": {
+            "title": "Number of children",
+            "type": "integer",
+            "description": "Number of children for the search",
+            "default": 0,
+            "maximum": 50
+        },
+        "minMaxPrice": {
+            "title": "Price range",
+            "type": "string",
+            "description": "Minimum-maximum price range",
+            "default": "none",
+            "enum": ["none", "0-50", "50-100", "100-150", "150-200", "200+"],
+            "enumTitles": [
+                "none",
+                "0 - € 50",
+                "€ 50 - € 100",
+                "€ 100 - € 150",
+                "€ 150 - € 200",
+                "€ 200 +"
+            ]
+        },
         "proxyConfig": {
-            "title": "Proxy configuration",
+            "title": "Proxy Configuration",
             "type": "object",
             "description": "SHADER proxy group usually works the best if you have access to it.",
             "prefill": { "useApifyProxy": true },
             "editor": "proxy",
-            "sectionCaption": "Proxy Configuration"
+            "sectionCaption": "Advanced options (proxy configuration, extend output)"
         },
         "testProxy": {
             "title": "Test proxies (useful for proxy groups with many blocked IPs, experimental)",
@@ -381,8 +378,7 @@
             "nullable": true,
             "description": "Function that takes a JQuery handle ($) as argument and returns data that will be merged with the default output",
             "prefill": "($) => { return {} }",
-            "editor": "javascript",
-            "sectionCaption": "Extend output"
+            "editor": "javascript"
         }
     },
     "required": ["proxyConfig"]
