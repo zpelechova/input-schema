@@ -74,7 +74,7 @@
             "title": "Proxy configuration",
             "type": "object",
             "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify proxy, or provide your own proxy servers.",
-            "prefill": { "useApifyProxy": true, "apifyProxyGroups": [] },
+            "prefill": { "useApifyProxy": true},
             "editor": "proxy",
             "sectionCaption": "Proxy and browser configuration"
         },
