@@ -35,7 +35,9 @@
           "title": "Start URLs",
           "type": "array",
           "editor": "requestListSources",
-          "description": "List of URLs that will be crawled."
+          "description": "List of URLs that will be crawled.",
+          "sectionCaption": "Start with URL or ZPID",
+          "sectionDescription": "You can use a direct URL or ZPID instead of simple search."
       },
       "zpids": {
           "title": "Zillow home IDs",
@@ -48,7 +50,8 @@
           "type": "integer",
           "minimum": 0,
           "prefill": 5,
-          "description": "Maximum map splitting level"
+          "description": "Maximum map splitting level",
+          "sectionCaption": "Other filters"
       },
       "minDate": {
           "title": "Minimum date",
@@ -70,7 +73,8 @@
           "editor": "proxy",
           "description": "The best option is usually Automatic proxy. But you can also use your own proxies or no proxy",
           "default": { "useApifyProxy": true },
-          "prefill": { "useApifyProxy": true }
+          "prefill": { "useApifyProxy": true },
+          "sectionCaption": "Proxy and browser configuration"
       },
       "maxRetries": {
           "title": "Max retries",
@@ -79,6 +83,28 @@
           "editor": "number",
           "prefill": 20,
           "default": 20
+      },
+      "handlePageTimeoutSecs": {
+          "title": "Timeout seconds",
+          "description": "Configure the handlePageTimeoutSecs setting",
+          "default": 3600,
+          "prefill": 3600,
+          "type": "integer",
+          "editor": "number"
+      },
+      "stealth": {
+          "title": "Stealth",
+          "description": "Apply stealth to the browser",
+          "default": false,
+          "type": "boolean",
+          "editor": "checkbox"
+      },
+      "debugLog": {
+          "title": "Debug log",
+          "description": "Enable debug log",
+          "default": false,
+          "type": "boolean",
+          "editor": "checkbox"
       },
       "extendOutputFunction": {
           "title": "Extend output function",
@@ -104,28 +130,6 @@
           "prefill": {},
           "type": "object",
           "editor": "json"
-      },
-      "handlePageTimeoutSecs": {
-          "title": "Timeout seconds",
-          "description": "Configure the handlePageTimeoutSecs setting",
-          "default": 3600,
-          "prefill": 3600,
-          "type": "integer",
-          "editor": "number"
-      },
-      "stealth": {
-          "title": "Stealth",
-          "description": "Apply stealth to the browser",
-          "default": false,
-          "type": "boolean",
-          "editor": "checkbox"
-      },
-      "debugLog": {
-          "title": "Debug log",
-          "description": "Enable debug log",
-          "default": false,
-          "type": "boolean",
-          "editor": "checkbox"
       }
   }
 }
