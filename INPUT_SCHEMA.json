@@ -15,14 +15,9 @@
           "type": "string",
           "description": "Property for sale/rent",
           "default": "all",
+          "prefill": "all",
           "enum": ["all", "sale", "fsbo", "rent", "sold"],
           "enumTitles": ["All", "For sale", "For sale by owner", "For rent", "Sold"]
-      },
-      "simple": {
-          "title": "Simple results",
-          "type": "boolean",
-          "description": "Return only a subset of possible result attributes.",
-          "default": true
       },
       "maxItems": {
           "title": "Max items",
@@ -30,6 +25,12 @@
           "minimum": 0,
           "prefill": 200,
           "description": "Limit of home detail pages to be scraped"
+      },
+      "simple": {
+          "title": "Simple results",
+          "type": "boolean",
+          "description": "Return only a subset of possible result attributes.",
+          "default": true
       },
       "startUrls": {
           "title": "Start URLs",
@@ -51,7 +52,7 @@
           "minimum": 0,
           "prefill": 5,
           "description": "Maximum map splitting level",
-          "sectionCaption": "Other filters"
+          "sectionCaption": "Other filters (ZOOM level, dates)"
       },
       "minDate": {
           "title": "Minimum date",
