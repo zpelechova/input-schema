@@ -1,91 +1,131 @@
 {
-    "title": "Yelp Scraper",
-    "description": "Provide either search terms or direct URLs.",
-    "type": "object",
-    "schemaVersion": 1,
-    "properties": {
-        "searchTerms": {
-            "title": "Search terms",
-            "type": "array",
-            "description": "Here you can provide a search queries for Yelp bussinesses to scrape. <br /><br /><strong>Choose either of 'Search Terms' or 'Direct URLs'.</strong>",
-            "editor": "stringList",
-            "prefill": ["Pizza"]
-        },
-        "locations": {
-            "title": "Locations",
-            "type": "array",
-            "description": "Locations that will be searched for each search term.",
-            "editor": "stringList",
-            "prefill": ["New York"]
-        },
-        "searchLimit": {
-            "title": "Search results limit",
-            "type": "integer",
-            "description": "How many search results (eq. Yelp bussinesses) should be processed per search query",
-            "editor": "number",
-            "prefill": 10,
-            "minimum": 1,
-            "maximum": 999999
-        },
-        "directUrls": {
-            "title": "Direct Yelp page URLs instead of search",
-            "type": "array",
-            "description": "If you already have URL(s) of page(s) you wish to scrape, you can set them here. <br /><br /><strong>Either of 'Search' or 'Direct URLs' or both fields.</strong>",
-            "editor": "stringList",
-            "placeholderValue": "URL",
-            "patternValue": "^(|(https?:\\/\\/)?www.yelp.[a-z]+(\\/.*)?)$",
-            "uniqueItems": true,
-            "default": []
-        },
-        "maxImages": {
-            "title": "Max images",
-            "description": "Maximum number of images per business",
-            "type": "integer",
-            "minimum": 0,
-            "unit": "per business",
-            "prefill": 1,
-            "editor": "number",
-            "sectionCaption": "Scraping images and reviews",
-            "sectionDescription": "Warning! Reviewer name and Reviewer URL contain personal data. Personal data is protected by GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
-        },
-        "reviewLimit": {
-            "title": "Maximum reviews",
-            "type": "integer",
-            "description": "How many reviews should be scraped per business",
-            "editor": "number",
-            "unit": "per business",
-            "prefill": 5,
-            "minimum": 0,
-            "maximum": 999999
-        },
-        "scrapeReviewerName": {
-            "title": "Reviewer name",
-            "type": "boolean",
-            "description": "Extract Reviewer name",
-            "default": false
-        },
-        "scrapeReviewerUrl": {
-            "title": "Reviewer URL",
-            "type": "boolean",
-            "description": "Extract Reviewer URL",
-            "default": false
-        },
-        "proxy": {
-            "title": "Proxy configuration",
-            "type": "object",
-            "description": "<strong>Proxy is required to run this actor!</strong> Either use Apify proxy, or provide your own proxy servers.",
-            "prefill": { "useApifyProxy": true},
-            "editor": "proxy",
-            "sectionCaption": "Proxy and browser configuration"
-        },
-        "maxRequestRetries": {
-            "title": "Max page retries",
-            "type": "integer",
-            "description": "How many times a failed request is retried before thrown away. Requests usually failed when blocked by the target site.",
-            "default": 10,
-            "minimum": 0,
-            "maximum": 100
-        }
-    },
-    "required": ["proxy"]
+  "title": "Zillow.com scraper input schema",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+      "search": {
+          "title": "Search",
+          "type": "string",
+          "editor": "textfield",
+          "prefill": "Los Angeles",
+          "description": "Query to search on Zillow.com"
+      },
+      "type": {
+          "title": "Type",
+          "type": "string",
+          "description": "Property for sale/rent",
+          "default": "all",
+          "enum": ["all", "sale", "fsbo", "rent", "sold"],
+          "enumTitles": ["All", "For sale", "For sale by owner", "For rent", "Sold"]
+      },
+      "simple": {
+          "title": "Simple results",
+          "type": "boolean",
+          "description": "Return only a subset of possible result attributes.",
+          "default": true
+      },
+      "maxItems": {
+          "title": "Max items",
+          "type": "integer",
+          "minimum": 0,
+          "prefill": 200,
+          "description": "Limit of home detail pages to be scraped"
+      },
+      "startUrls": {
+          "title": "Start URLs",
+          "type": "array",
+          "editor": "requestListSources",
+          "description": "List of URLs that will be crawled."
+      },
+      "zpids": {
+          "title": "Zillow home IDs",
+          "type": "array",
+          "editor": "json",
+          "description": "List of ZPIDs that will be scraped."
+      },
+      "maxLevel": {
+          "title": "Max zoom level",
+          "type": "integer",
+          "minimum": 0,
+          "prefill": 5,
+          "description": "Maximum map splitting level"
+      },
+      "minDate": {
+          "title": "Minimum date",
+          "type": "string",
+          "editor": "textfield",
+          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
+          "description": "Oldest date allowed in results. Can use specific dates, such as YYYY-MM-DD or relative ones, like '1 month' or '2 days'"
+      },
+      "maxDate": {
+          "title": "Maximum date",
+          "type": "string",
+          "editor": "textfield",
+          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
+          "description": "Newest date allowed in results. Can use specific dates, such as YYYY-MM-DD or relative ones, like '1 month' or '2 days'"
+      },
+      "proxyConfiguration": {
+          "title": "Proxy configuration",
+          "type": "object",
+          "editor": "proxy",
+          "description": "The best option is usually Automatic proxy. But you can also use your own proxies or no proxy",
+          "default": { "useApifyProxy": true },
+          "prefill": { "useApifyProxy": true }
+      },
+      "maxRetries": {
+          "title": "Max retries",
+          "description": "How many retries until the scraper should give up",
+          "type": "integer",
+          "editor": "number",
+          "prefill": 20,
+          "default": 20
+      },
+      "extendOutputFunction": {
+          "title": "Extend output function",
+          "type": "string",
+          "editor": "javascript",
+          "description": "Extend the output item to contain more fields. The raw data is present in the 'data' variable.",
+          "prefill": "async ({ data, item, customData, Apify }) => {\n    return item;\n}",
+          "sectionCaption": "Extend scraper functionality",
+          "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior on the scraper."
+      },
+      "extendScraperFunction": {
+          "title": "Extend Scraper Function",
+          "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
+          "type": "string",
+          "default": "",
+          "prefill": "async ({ label, page, request, customData, Apify }) => {\n    if (label === 'SETUP') {\n        // before crawler.run()\n    } else if (label === 'GOTO') {\n        // inside handleGotoFunction\n    } else if (label === 'HANDLE') {\n        // inside handlePageFunction\n    } else if (label === 'FINISH') {\n        // after crawler.run()\n    }\n}",
+          "editor": "javascript"
+      },
+      "customData": {
+          "title": "Custom data",
+          "description": "Any data that you want to have available inside the Extend Output/Scraper Function",
+          "default": {},
+          "prefill": {},
+          "type": "object",
+          "editor": "json"
+      },
+      "handlePageTimeoutSecs": {
+          "title": "Timeout seconds",
+          "description": "Configure the handlePageTimeoutSecs setting",
+          "default": 3600,
+          "prefill": 3600,
+          "type": "integer",
+          "editor": "number"
+      },
+      "stealth": {
+          "title": "Stealth",
+          "description": "Apply stealth to the browser",
+          "default": false,
+          "type": "boolean",
+          "editor": "checkbox"
+      },
+      "debugLog": {
+          "title": "Debug log",
+          "description": "Enable debug log",
+          "default": false,
+          "type": "boolean",
+          "editor": "checkbox"
+      }
   }
+}
