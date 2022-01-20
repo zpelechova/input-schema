@@ -1,136 +1,93 @@
 {
-  "title": "Zillow.com scraper input schema",
+  "title": "Input schema for TikTok scraper",
+  "description": "Scrapes the hashtag searches, profiles and individual posts.",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-      "search": {
-          "title": "Search",
-          "type": "string",
-          "editor": "textfield",
-          "prefill": "Los Angeles",
-          "description": "Query to search on Zillow.com"
-      },
-      "type": {
-          "title": "Type",
-          "type": "string",
-          "description": "Property for sale/rent",
-          "default": "all",
-          "prefill": "all",
-          "enum": ["all", "sale", "fsbo", "rent", "sold"],
-          "enumTitles": ["All", "For sale", "For sale by owner", "For rent", "Sold"]
-      },
-      "maxItems": {
-          "title": "Max items",
-          "type": "integer",
-          "minimum": 0,
-          "prefill": 200,
-          "description": "Limit of home detail pages to be scraped"
-      },
-      "simple": {
-          "title": "Simple results",
-          "type": "boolean",
-          "description": "Return only a subset of possible result attributes.",
-          "default": true
-      },
-      "startUrls": {
-          "title": "Start URLs",
-          "type": "array",
-          "editor": "requestListSources",
-          "description": "List of URLs that will be crawled.",
-          "sectionCaption": "Start with URL or ZPID",
-          "sectionDescription": "You can use a direct URL or ZPID instead of simple search."
-      },
-      "zpids": {
-          "title": "Zillow home IDs",
-          "type": "array",
-          "editor": "json",
-          "description": "List of ZPIDs that will be scraped."
-      },
-      "maxLevel": {
-          "title": "Max zoom level",
-          "type": "integer",
-          "minimum": 0,
-          "prefill": 5,
-          "description": "Maximum map splitting level",
-          "sectionCaption": "Other filters (ZOOM level, dates)"
-      },
-      "minDate": {
-          "title": "Minimum date",
-          "type": "string",
-          "editor": "textfield",
-          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
-          "description": "Oldest date allowed in results. Can use specific dates, such as YYYY-MM-DD or relative ones, like '1 month' or '2 days'"
-      },
-      "maxDate": {
-          "title": "Maximum date",
-          "type": "string",
-          "editor": "textfield",
-          "pattern": "(\\d{4}-\\d{2}-\\d{2}|(\\d+)\\s?\\S+)",
-          "description": "Newest date allowed in results. Can use specific dates, such as YYYY-MM-DD or relative ones, like '1 month' or '2 days'"
-      },
-      "proxyConfiguration": {
-          "title": "Proxy configuration",
-          "type": "object",
-          "editor": "proxy",
-          "description": "The best option is usually Automatic proxy. But you can also use your own proxies or no proxy",
-          "default": { "useApifyProxy": true },
-          "prefill": { "useApifyProxy": true },
-          "sectionCaption": "Proxy and browser configuration"
-      },
-      "maxRetries": {
-          "title": "Max retries",
-          "description": "How many retries until the scraper should give up",
-          "type": "integer",
-          "editor": "number",
-          "prefill": 20,
-          "default": 20
-      },
-      "handlePageTimeoutSecs": {
-          "title": "Timeout seconds",
-          "description": "Configure the handlePageTimeoutSecs setting",
-          "default": 3600,
-          "prefill": 3600,
-          "type": "integer",
-          "editor": "number"
-      },
-      "stealth": {
-          "title": "Stealth",
-          "description": "Apply stealth to the browser",
-          "default": false,
-          "type": "boolean",
-          "editor": "checkbox"
-      },
-      "debugLog": {
-          "title": "Debug log",
-          "description": "Enable debug log",
-          "default": false,
-          "type": "boolean",
-          "editor": "checkbox"
-      },
-      "extendOutputFunction": {
-          "title": "Extend output function",
-          "type": "string",
-          "editor": "javascript",
-          "description": "Extend the output item to contain more fields. The raw data is present in the 'data' variable.",
-          "prefill": "async ({ data, item, customData, Apify }) => {\n    return item;\n}",
-          "sectionCaption": "Extend scraper functionality",
-          "sectionDescription": "You can change the output of the items for your dataset here, or add additional behavior on the scraper."
-      },
-      "extendScraperFunction": {
-          "title": "Extend Scraper Function",
-          "description": "Advanced function that allows you to extend the default scraper functionality, allowing you to manually perform actions on the page",
-          "type": "string",
-          "default": "",
-          "prefill": "async ({ label, page, request, customData, Apify }) => {\n    if (label === 'SETUP') {\n        // before crawler.run()\n    } else if (label === 'GOTO') {\n        // inside handleGotoFunction\n    } else if (label === 'HANDLE') {\n        // inside handlePageFunction\n    } else if (label === 'FINISH') {\n        // after crawler.run()\n    }\n}",
-          "editor": "javascript"
-      },
-      "customData": {
-          "title": "Custom data",
-          "description": "Any data that you want to have available inside the Extend Output/Scraper Function",
-          "default": {},
-          "prefill": {},
-          "type": "object",
-          "editor": "json"
-      }
+  "hashtags": {
+  "title": "What TikTok hashtags do you want to scrape?",
+  "type": "array",
+  "editor": "stringList",
+  "description": "Just add TikTok hashtags and the scraper will collect information about users, followers, likes, and more.",
+  "prefill": [
+  "followforfollowback"
+  ]
+  },
+  "profiles": {
+      "title": "What user profiles do you want to scrape?",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Add the name of user you want to scrape.",
+      "sectionCaption": "Profiles"
+  },
+  "postURLs": {
+  "title": "What videos do you want to scrape?",
+  "type": "array",
+  "editor": "stringList",
+  "description": "Add the URLs of posted videos you want to scrape. You can enter URLs one by one, or you can upload or link to a text file.",
+  "sectionCaption": "Post URLs"
+  },
+  "proxyConfiguration": {
+  "title": "Set up your proxy configuration",
+  "type": "object",
+  "editor": "proxy",
+  "description": "Automatic proxy and the country of your choice is usually the best option, but you can also select specific proxies, or use your own custom proxies.",
+  "prefill": {
+  "useApifyProxy": true
+  },
+  "sectionCaption": "Proxy configuration"
+  },
+  "maxRequestRetries": {
+      "title": "Max request retries",
+      "type": "integer",
+      "editor": "number",
+      "description": "How many times a page will be retried in case of being blocked or other errors.",
+      "default": 10,
+      "sectionCaption": "Request retries"
+  },
+  "maxConcurrency": {
+      "title": "Max Concurrency",
+      "type": "integer",
+      "description": "Max number of allowed instances running in parallel. More instances need more memory!",
+      "editor": "number",
+      "default": 1,
+      "sectionCaption": "Concurrency"
+  },
+  "resultsPerPage": {
+      "title": "Max results per page",
+      "type": "integer",
+      "unit": "results",
+      "description": "The number of results that will be scraped from every hashtag and profile.",
+      "minimum": 1,
+      "default": 10,
+      "sectionCaption": "Scraped results per page"
+  },
+  "commentsPerPost": {
+      "title": "Max comments per post",
+      "type": "integer",
+      "unit": "comments",
+      "description": "The number of comments that will be scraped from every scraped result.",
+      "minimum": 0,
+      "default": 0,
+      "sectionCaption": "Scraped comments per post"
+  },
+  "loginCookies": {
+  "title": "Cookies",
+  "type": "array",
+  "description": "If you want to scrape comments you need to sign in to TikTok and you can use your cookies on input.",
+  "editor": "json",
+  "sectionCaption": "Login",
+  "sectionDescription": "TikTok limits access to comments if a user is anonymous. You can provide cookies here to log in as a normal TikTok user (you can copy with a Chrome plugin like 'EditThisCookie'). Note that we recommend that you do not use your own TikTok account for this - use a new, temporary TikTok account. When cookies are used, the run is limited to concurrency 1 and one session, so that the account does not get banned too soon."
+  },
+  "upload": {
+  "title": "Upload output to Google Cloud Storage",
+  "type": "boolean",
+  "description": "Should the output be uploaded to the Google Cloud Storage service.",
+  "default": true,
+  "sectionCaption": "upload"
   }
-}
+  },
+  "required": [
+  "proxyConfiguration"
+  ]
+  }
