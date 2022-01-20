@@ -32,6 +32,22 @@
             "editor": "stringList",
             "description": "Add the URLs of posted videos you want to scrape. You can enter URLs one by one, or you can upload or link to a text file."
         },
+        "commentsPerPost": {
+            "title": "Max comments per post",
+            "type": "integer",
+            "unit": "comments",
+            "description": "The number of comments that will be scraped from every scraped result. 0 means no comments will be scraped and you don't need to use cookies to login",
+            "minimum": 0,
+            "default": 0,
+            "sectionCaption": "Scraping comments",
+            "sectionDescription": "TikTok limits access to comments if a user is anonymous. If you want to scrape comments, you have to provide cookies to log in as a normal TikTok user (you can copy with a Chrome plugin like 'EditThisCookie'). Note that we recommend that you ** do not use your own TikTok account for this ** - use a new, temporary TikTok account. When cookies are used, the run is limited to concurrency 1 and one session, so that the account does not get banned too soon."
+        },
+        "loginCookies": {
+            "title": "Cookies",
+            "type": "array",
+            "description": "If you want to scrape comments you need to sign in to TikTok and you can use your cookies on input.",
+            "editor": "json"
+        },
         "proxyConfiguration": {
             "title": "Set up your proxy configuration",
             "type": "object",
@@ -55,22 +71,6 @@
             "description": "Max number of allowed instances running in parallel. More instances need more memory!",
             "editor": "number",
             "default": 1
-        },
-        "commentsPerPost": {
-            "title": "Max comments per post",
-            "type": "integer",
-            "unit": "comments",
-            "description": "The number of comments that will be scraped from every scraped result. 0 means no comments will be scraped and you don't need to use cookies to login",
-            "minimum": 0,
-            "default": 0,
-            "sectionCaption": "Scraping comments",
-            "sectionDescription": "TikTok limits access to comments if a user is anonymous. If you want to scrape comments, you have to provide cookies to log in as a normal TikTok user (you can copy with a Chrome plugin like 'EditThisCookie'). Note that we recommend that you ** do not use your own TikTok account for this ** - use a new, temporary TikTok account. When cookies are used, the run is limited to concurrency 1 and one session, so that the account does not get banned too soon."
-        },
-        "loginCookies": {
-            "title": "Cookies",
-            "type": "array",
-            "description": "If you want to scrape comments you need to sign in to TikTok and you can use your cookies on input.",
-            "editor": "json"
         }
     },
     "required": ["proxyConfiguration"]
