@@ -36,7 +36,7 @@
         "type": "boolean",
         "description": "If checked results includes reviews data",
         "default": true,
-        "sectionCaption": "Reviews"
+        "sectionCaption": "Include reviews, calendar, host info"
       },
       "maxReviews": {
         "title": "Maximum reviews",
@@ -56,36 +56,8 @@
         "description": "If checked, add more information for the primary host such as host url and number of listings. Only work if the Extract main listing information only (no detail) is unchecked",
         "default": false
       },
-      "checkIn": {
-        "title": "Checkin date",
-        "type": "string",
-        "description": "First day of stay. Format: YYYY-MM-DD",
-        "example": "YYYY-MM-DD",
-        "editor": "textfield",
-        "sectionCaption": "Filters"
-      },
-      "checkOut": {
-        "title": "Checkout date",
-        "type": "string",
-        "description": "Last day of stay. Format: YYYY-MM-DD",
-        "example": "YYYY-MM-DD",
-        "editor": "textfield"
-      },
-      "minPrice": {
-        "title": "Minimum price",
-        "type": "integer",
-        "description": "Sets filter min_price (per night) to the search query.",
-        "default": 0,
-        "example": 100
-      },
-      "maxPrice": {
-        "title": "Maximum price",
-        "type": "integer",
-        "description": "Sets filter max_price (per night) to the search query.",
-        "default": 100000,
-        "example": 100000
-      },
       "currency": {
+        "sectionCaption": "Filters",
         "title": "Currency",
         "type": "string",
         "description": "Currency for displayed prices.",
@@ -393,6 +365,30 @@
         "default": "USD",
         "prefill": "USD"
       },
+      "minPrice": {
+        "title": "Minimum price",
+        "type": "integer",
+        "description": "Sets filter min_price (per night) to the search query."
+      },
+      "maxPrice": {
+        "title": "Maximum price",
+        "type": "integer",
+        "description": "Sets filter max_price (per night) to the search query."
+      },
+      "checkIn": {
+        "title": "Checkin date",
+        "type": "string",
+        "description": "First day of stay. Format: YYYY-MM-DD",
+        "example": "YYYY-MM-DD",
+        "editor": "textfield"
+      },
+      "checkOut": {
+        "title": "Checkout date",
+        "type": "string",
+        "description": "Last day of stay. Format: YYYY-MM-DD",
+        "example": "YYYY-MM-DD",
+        "editor": "textfield"
+      },
       "proxyConfiguration": {
         "title": "Proxy configuration",
         "type": "object",
@@ -404,7 +400,7 @@
           "useApifyProxy": true
         },
         "editor": "proxy",
-        "sectionCaption": "Advanced options"
+        "sectionCaption": "For developers"
       },
       "maxConcurrency": {
         "title": "Max concurrency",
