@@ -8,15 +8,15 @@
         "title": "Location",
         "type": "string",
         "description": "Location name as you would enter to Airbnb search. Actor takes the first result as desired location.",
+        "default": "Sacramento",
         "prefill": "Sacramento",
         "editor": "textfield"
       },
-      "maxListings": {
-        "title": "Max listings",
-        "type": "integer",
-        "description": "Limit the amount of results you want. Omit this setting for no limit",
-        "prefill": 10,
-        "example": 10
+      "startUrls": {
+        "title": "Start URLs",
+        "type": "array",
+        "description": "Urls of Airbnb details (not search urls), when set the actor will ignore locationQuery and will return results only for these listings",
+        "editor": "requestListSources"
       },
       "simple": {
         "title": "Extract main listing information only (no detail)",
@@ -24,45 +24,25 @@
         "description": "The crawler will get only the main listing information and skip other details.",
         "default": true
       },
-      "startUrls": {
-        "title": "Start URLs",
-        "type": "array",
-        "description": "Urls of Airbnb details (not search urls), when set the actor will ignore locationQuery and will return results only for these listings",
-        "editor": "requestListSources",
-        "sectionCaption": "Or use URL(s) of a specific place(s)"
-      },
       "includeReviews": {
         "title": "Include reviews",
         "type": "boolean",
         "description": "If checked results includes reviews data",
-        "default": true,
-        "sectionCaption": "Reviews"
+        "default": true
       },
       "maxReviews": {
         "title": "Maximum reviews",
         "type": "integer",
         "description": "Amount of reviews to be scraped for each listing.",
-        "prefill": 10
-      },
-      "includeCalendar": {
-        "title": "Include calendar",
-        "type": "boolean",
-        "description": "If checked, includes the available range of days",
-        "default": false
-      },
-      "addMoreHostInfo": {
-        "title": "Add more host information",
-        "type": "boolean",
-        "description": "If checked, add more information for the primary host such as host url and number of listings. Only work if the Extract main listing information only (no detail) is unchecked",
-        "default": false
+        "default": 10,
+        "example": 10
       },
       "checkIn": {
         "title": "Checkin date",
         "type": "string",
         "description": "First day of stay. Format: YYYY-MM-DD",
         "example": "YYYY-MM-DD",
-        "editor": "textfield",
-        "sectionCaption": "Filters"
+        "editor": "textfield"
       },
       "checkOut": {
         "title": "Checkout date",
@@ -84,6 +64,18 @@
         "description": "Sets filter max_price (per night) to the search query.",
         "default": 100000,
         "example": 100000
+      },
+      "includeCalendar": {
+        "title": "Include calendar",
+        "type": "boolean",
+        "description": "If checked, includes the available range of days",
+        "default": false
+      },
+      "addMoreHostInfo": {
+        "title": "Add more host information",
+        "type": "boolean",
+        "description": "If checked, add more information for the primary host such as host url and number of listings. Only work if the Extract main listing information only (no detail) is unchecked",
+        "default": false
       },
       "currency": {
         "title": "Currency",
@@ -403,8 +395,14 @@
         "default": {
           "useApifyProxy": true
         },
-        "editor": "proxy",
-        "sectionCaption": "Advanced options"
+        "editor": "proxy"
+      },
+      "maxListings": {
+        "title": "Max listings",
+        "type": "integer",
+        "description": "Limit the amount of results you want. Omit this setting for no limit",
+        "prefill": 10,
+        "example": 10
       },
       "maxConcurrency": {
         "title": "Max concurrency",
@@ -438,6 +436,7 @@
       }
     },
     "required": [
+      "includeReviews",
       "currency",
       "proxyConfiguration"
     ]
