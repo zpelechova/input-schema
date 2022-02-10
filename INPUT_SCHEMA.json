@@ -29,14 +29,14 @@
         "type": "array",
         "description": "Urls of Airbnb details (not search urls), when set the actor will ignore locationQuery and will return results only for these listings",
         "editor": "requestListSources",
-        "sectionCaption": "Or use URL(s) of a specific place(s)"
+        "sectionCaption": "URL(s) of a specific place(s)"
       },
       "includeReviews": {
         "title": "Include reviews",
         "type": "boolean",
         "description": "If checked results includes reviews data",
         "default": true,
-        "sectionCaption": "Include reviews, calendar, host info"
+        "sectionCaption": "Include reviews, calendar, host info?"
       },
       "maxReviews": {
         "title": "Maximum reviews",
