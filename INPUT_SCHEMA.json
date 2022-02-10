@@ -1,6 +1,6 @@
 {
-    "title": "Airbnb Scrapper input",
-    "description": "To unleashed the full power of the scraper/API use the options bellow!",
+    "title": "Airbnb Scraper input",
+    "description": "Just change the location you are interested in, click on run and your data is on its way!",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
