@@ -24,7 +24,9 @@ Apify.main(async () => {
 
     await Apify.metamorph('drobnikj/crawler-google-places', {
         ...input,
-        proxyConfig,
+        proxyConfig: {
+            useApifyProxy: true
+        },
         scrapeReviewerName,
         scrapeReviewerId,
         scrapeReviewerUrl,
