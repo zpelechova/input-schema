@@ -53,5 +53,6 @@
             "editor": "proxy",
             "sectionCaption": "For developers"
         }
-    }
+    },
+    "required": ["proxy"]
 }

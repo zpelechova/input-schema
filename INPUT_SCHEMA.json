@@ -30,7 +30,8 @@
             "title": "Category Urls",
             "type": "array",
             "description": "Choose specific categories to scrape. Example URL: https://www.amazon.com/Best-Sellers-Automotive/zgbs/automotive. If this field is empty, top level results are chosen",
-            "editor": "requestListSources"
+            "editor": "requestListSources",
+            "prefill": "https://www.amazon.com/Best-Sellers-Electronics/zgbs/electronics/ref=zg_bs_nav_0"
         },
         "depthOfCrawl": {
             "title": "Depth of crawl",
@@ -49,10 +50,9 @@
             "prefill": {
                 "useApifyProxy": true
             },
-            "editor": "proxy"
+            "editor": "proxy",
+            "sectionCaption": "For developers"
         }
     },
-    "required": [
-        "proxy"
-      ]
+    "required": ["proxy"]
 }
