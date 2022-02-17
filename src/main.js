@@ -20,13 +20,11 @@ Apify.main(async () => {
         scrapeReviewUrl = true;
         scrapeResponseFromOwnerText = true;
     }
-    const proxyConfig = { useApifyProxy: true };
+    const proxyConfig = { "useApifyProxy": true };
 
     await Apify.metamorph('drobnikj/crawler-google-places', {
         ...input,
-        proxyConfig: {
-            useApifyProxy: true
-        },
+        proxyConfig,
         scrapeReviewerName,
         scrapeReviewerId,
         scrapeReviewerUrl,
