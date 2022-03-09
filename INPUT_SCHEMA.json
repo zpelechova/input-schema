@@ -8,7 +8,7 @@
         "title": "Start names or URLs",
         "type": "array",
         "description": "Names or URLs to start with.",
-        "editor": "stringlist",
+        "editor": "stringList",
         "prefill": [
           "pinterest.com/poltronafrau",
           "bellinthewoods"
