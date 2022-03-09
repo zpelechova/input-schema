@@ -23,7 +23,7 @@
         "prefill": 50
       },
       "proxyConfig": {
-        "sectionTitle": "Proxy configuration",
+        "sectionCaption": "Proxy configuration",
         "title": "Proxy configuration",
         "type": "object",
         "description": "You need to use Apify proxy or custom proxies.",
