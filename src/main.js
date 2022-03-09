@@ -28,9 +28,15 @@ Apify.main(async () => {
         scrapeReviewerUrl,
         scrapeReviewId,
         scrapeReviewUrl,
+<<<<<<< HEAD
         scrapeResponseFromOwnerText,
         proxyConfig: {
             'useApifyProxy': true
         }
     });
 });
+=======
+        scrapeResponseFromOwnerText
+    });
+});
+>>>>>>> 76c9ba0bab32eb014867b285cbf912f114c325e0
