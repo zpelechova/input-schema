@@ -5,7 +5,7 @@
     "schemaVersion": 1,
     "properties": {
       "startUrls": {
-        "title": "Start names or URLs",
+        "title": "Pinterest users or URLs",
         "type": "array",
         "description": "Names or URLs to start with.",
         "editor": "stringList",
