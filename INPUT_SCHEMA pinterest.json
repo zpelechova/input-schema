@@ -1,0 +1,39 @@
+{
+    "title": "Pinterest Crawler",
+    "description": "Get user profile and pins from URLs or names list",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+      "startUrls": {
+        "title": "Pinterest users or URLs",
+        "type": "array",
+        "description": "Names or URLs to start with.",
+        "editor": "stringList",
+        "prefill": [
+          "pinterest.com/poltronafrau",
+          "bellinthewoods"
+        ]
+      },
+      "maxPinsCnt": {
+        "title": "Max pins per profile",
+        "type": "integer",
+        "description": "Max pins per profile",
+        "editor": "number",
+        "minimum": 1,
+        "prefill": 50
+      },
+      "proxyConfig": {
+        "sectionCaption": "Proxy configuration",
+        "title": "Proxy configuration",
+        "type": "object",
+        "description": "You need to use Apify proxy or custom proxies.",
+        "prefill": {
+            "useApifyProxy": true
+        },
+        "editor": "proxy"
+      }
+    },
+    "required": [
+      "startUrls", "proxyConfig"
+    ]
+  }

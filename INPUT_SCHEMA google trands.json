@@ -10,6 +10,19 @@
           "description": "(Required if 'spreadsheetId' is not provided) List of search terms to be scraped.",
           "prefill": [ "webscraping" ]
       },
+      "spreadsheetId": {
+          "title": "Spreadsheet id",
+          "type": "string",
+          "description": "(Optional) Id of the google sheet from where search terms will be loaded.\n Spreadsheet must have only one column. Row 1 is considered the title of the column so it will not be loaded as a search term. Check the actor documentation for more info.",
+          "editor": "textfield"
+      },
+      "isPublic": {
+          "title": "Is public",
+          "type": "boolean",
+          "editor": "checkbox",
+          "description": "If checked you can import a public spreadsheet without need for authorization. For importing private sheets, please read about authorization in the actor documentation.",
+          "default": false
+      },
       "timeRange": {
           "title": "Time range",
           "type": "string",
@@ -39,6 +52,18 @@
               "all"
           ],
           "prefill": ""
+      },
+      "category": {
+          "title": "Category",
+          "type": "string",
+          "description": "Choose a category to filter the search for (defaults to 'All categories')",
+          "editor": "select",
+          "default": "",
+          "enumTitles": ["All categories", "Arts & Entertainment", "Autos & Vehicles", "Beauty & Fitness", "Books & Literature", "Business & Industrial", "Computers & Electronics",
+              "Finance", "Food & Drink", "Games", "Health", "Hobbies & Leisure", "Home & Garden", "Internet & Telecom", "Jobs & Education", "Law & Government", "News",
+              "Online Communities", "People & Society", "Pets & Animals", "Property", "Reference", "Science", "Shopping", "Sports", "Travel"],
+          "enum": ["", "3", "47", "44", "22", "12", "5", "7", "71", "8", "45", "65", "11", "13", "958", "19",
+              "16", "299", "14", "66", "29", "533", "174", "18", "20", "67"]
       },
       "geo": {
           "title": "Geo area",
@@ -89,32 +114,6 @@
               "TV","UG","UA","AE","GB","US","UM","UY","UZ","VU","VE","VN","VG","VI","WF","EH","YE","ZM","ZW"
           ]
       },
-      "spreadsheetId": {
-          "title": "Get input Data from Google sheet : Google sheet ID",
-          "type": "string",
-          "description": "(Optional) Id of the google sheet from where search terms will be loaded.\n Spreadsheet must have only one column. Row 1 is considered the title of the column so it will not be loaded as a search term. Check the actor documentation for more info.",
-          "editor": "textfield",
-          "sectionCaption": "Advanced options"
-      },
-      "isPublic": {
-          "title": "Is public",
-          "type": "boolean",
-          "editor": "checkbox",
-          "description": "If checked you can import a public spreadsheet without need for authorization. For importing private sheets, please read about authorization in the actor documentation.",
-          "default": false
-      },
-      "category": {
-          "title": "Category of trends",
-          "type": "string",
-          "description": "Choose a category to filter the search for (defaults to 'All categories')",
-          "editor": "select",
-          "default": "",
-          "enumTitles": ["All categories", "Arts & Entertainment", "Autos & Vehicles", "Beauty & Fitness", "Books & Literature", "Business & Industrial", "Computers & Electronics",
-              "Finance", "Food & Drink", "Games", "Health", "Hobbies & Leisure", "Home & Garden", "Internet & Telecom", "Jobs & Education", "Law & Government", "News",
-              "Online Communities", "People & Society", "Pets & Animals", "Property", "Reference", "Science", "Shopping", "Sports", "Travel"],
-          "enum": ["", "3", "47", "44", "22", "12", "5", "7", "71", "8", "45", "65", "11", "13", "958", "19",
-              "16", "299", "14", "66", "29", "533", "174", "18", "20", "67"]
-      },
       "maxItems": {
           "title": "Max items",
           "type": "integer",
@@ -126,7 +125,8 @@
           "title": "Custom time range",
           "type": "string",
           "description": "Provide custom time range. If present, it takes precedence over regular timeRange. Format is: `YYYY-MM-DD YYYY-MM-DD`. See examples in the documentation.",
-          "editor": "textfield"
+          "editor": "textfield",
+          "sectionCaption": "Advanced options"
       },
       "extendOutputFunction": {
           "title": "Extend output function",
