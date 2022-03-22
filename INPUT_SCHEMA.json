@@ -90,14 +90,14 @@
           ]
       },
       "spreadsheetId": {
-          "title": "Get input Data from Google sheet : Google sheet ID",
+          "title": "Google sheet ID (To get input data from Google sheet)",
           "type": "string",
           "description": "(Optional) Id of the google sheet from where search terms will be loaded.\n Spreadsheet must have only one column. Row 1 is considered the title of the column so it will not be loaded as a search term. Check the actor documentation for more info.",
           "editor": "textfield",
           "sectionCaption": "Advanced options"
       },
       "isPublic": {
-          "title": "Is public",
+          "title": "Is the Google sheet public",
           "type": "boolean",
           "editor": "checkbox",
           "description": "If checked you can import a public spreadsheet without need for authorization. For importing private sheets, please read about authorization in the actor documentation.",
