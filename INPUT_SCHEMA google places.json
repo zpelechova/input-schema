@@ -1,31 +1,34 @@
 {
     "title": "Google Maps Scraper",
-    "description": "Provide either a list of search keywords or search/place URLs.",
+    "description": "Provide either a list of search keywords or search/place URLs. It is better to set location in the Geolocation settings below rather than add into the search terms. You will get more results and they will be accurate.",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
-        "startUrls": {
-            "title": "Start URLs",
-            "type": "array",
-            "description": "List of URLs to be crawled. They can be search URLs or place URLs. The only valid format for URLs contains either /maps/search or /maps/place",
-            "editor": "requestListSources"
-        },
         "searchStringsArray": {
             "title": "Search Terms",
             "type": "array",
             "description": "Array of strings to be searched. It is also possible to fill in Google Place IDs in the format place_id:ChIJp4JiUCNP0xQR1JaSjpW_Hms. Setting geolocation input fields is more accurate than including location in the search string.",
             "editor": "stringList",
-            "prefill": ["restaurant New York"]
+            "prefill": [
+                "restaurant New York"
+            ]
+        },
+        "startUrls": {
+            "title": "URL(s)",
+            "type": "array",
+            "description": "List of URLs to be crawled. They can be search URLs or place URLs. The only valid format for URLs contains either /maps/search or /maps/place",
+            "editor": "requestListSources"
         },
         "maxCrawledPlaces": {
             "title": "Max crawled places",
             "type": "integer",
             "description": "Maximum number of places you scrape per whole run. If you want to scrape all available, set this to `9999999`.",
             "prefill": 10,
-            "minimum": 0
+            "minimum": 0,
+            "editor": "hidden"
         },
         "maxCrawledPlacesPerSearch": {
-            "title": "Max crawled places per search",
+            "title": "Max places per search",
             "type": "integer",
             "description": "Maximum number of places you scrape per search term. If you want to scrape all available, set this to `9999999`.",
             "minimum": 0
@@ -191,6 +194,25 @@
             "example": "en",
             "prefill": "en"
         },
+        "allPlacesNoSearchAction": {
+            "title": "Scrape all places (no search term)",
+            "description": "Will scrape all places seen on the map. This depends on a lot of the zoom so for more places, increase the zoom. Doesn't work together with URLs",
+            "enum": [
+                "",
+                "all_places_no_search_mouse",
+                "all_places_no_search_ocr"
+            ],
+            "enumTitles": [
+                "Not applied (normal search or direct places)",
+                "Scrape by Moving mouse (slow)",
+                "Scrape by OCR tool (fast but you need 256 MB of extra memory to call another actor)"
+            ],
+            "type": "string",
+            "editor": "select",
+            "default": "",
+            "example": "",
+            "prefill": ""
+        },
         "exportPlaceUrls": {
             "title": "Export place URLs only (skips place details)",
             "type": "boolean",
@@ -198,7 +220,6 @@
             "default": false,
             "sectionCaption": "Output configuration",
             "sectionDescription": "You can set what extra information you would like extracted. For maximum efficiency, the default setup doesn't include reviews or images. If you need these, just increase the maximum count for them."
-  
         },
         "includeHistogram": {
             "title": "Include popular times",
@@ -224,6 +245,12 @@
             "description": "Extract additional information about each place, e.g. Service Options, Highlights, Offerings, etc. You can speed up crawling if you disable this.",
             "default": false
         },
+        "oneReviewPerRow": {
+            "title": "One review per row",
+            "type": "boolean",
+            "description": "If checked, the scraper will produce one row of results per each review. The information about the place is copied to each row.",
+            "default": false
+        },
         "maxImages": {
             "title": "Number of images (Slow for more than 1)",
             "type": "integer",
@@ -238,21 +265,27 @@
             "prefill": 0,
             "unit": "reviews per place"
         },
+        "reviewsStartDate": {
+            "title": "Reviews start date (scrape only newer than)",
+            "type": "string",
+            "description": "Format should be YYYY-MM-DD, e.g. 2022-02-20",
+            "editor": "textfield"
+        },
         "reviewsSort": {
             "title": "Sort reviews by",
             "description": "Define how reviews should be sorted.",
             "type": "string",
             "editor": "select",
-            "default": "mostRelevant",
+            "default": "newest",
             "enum": [
-                "mostRelevant",
                 "newest",
+                "mostRelevant",
                 "highestRanking",
                 "lowestRanking"
             ],
             "enumTitles": [
-                "Most relevant",
                 "Newest",
+                "Most relevant",
                 "Highest ranking",
                 "Lowest ranking"
             ]
@@ -275,92 +308,91 @@
             ]
         },
         "scrapeReviewerName": {
-          "title": "Reviewer name",
-          "type": "boolean",
-          "description": "Extract Reviewer name",
-          "default": true,
-          "sectionCaption": "Personal data (reviews only)",
-          "sectionDescription": "All of these fields contain personal data. Personal data is protected by the GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
-      },
-      "scrapeReviewerId": {
-          "title": "Reviewer ID",
-          "type": "boolean",
-          "description": "Extract Reviewer ID",
-          "default": true
-      },
-      "scrapeReviewerUrl": {
-          "title": "Reviewer URL",
-          "type": "boolean",
-          "description": "Extract Reviewer URL",
-          "default": true
-      },
-      "scrapeReviewId": {
-          "title": "Review ID",
-          "type": "boolean",
-          "description": "Extract Review ID",
-          "default": true
-      },
-      "scrapeReviewUrl": {
-          "title": "Review URL",
-          "type": "boolean",
-          "description": "Extract Review URL",
-          "default": true
-      },
-      "scrapeResponseFromOwnerText": {
-          "title": "Response from owner",
-          "type": "boolean",
-          "description": "Extract Response from owner",
-          "default": true
-      },
+            "title": "Reviewer name",
+            "type": "boolean",
+            "description": "Extract Reviewer name",
+            "default": true,
+            "sectionCaption": "Personal data (reviews only)",
+            "sectionDescription": "All of these fields contain personal data. Personal data is protected by the GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
+        },
+        "scrapeReviewerId": {
+            "title": "Reviewer ID",
+            "type": "boolean",
+            "description": "Extract Reviewer ID",
+            "default": true
+        },
+        "scrapeReviewerUrl": {
+            "title": "Reviewer URL",
+            "type": "boolean",
+            "description": "Extract Reviewer URL",
+            "default": true
+        },
+        "scrapeReviewId": {
+            "title": "Review ID",
+            "type": "boolean",
+            "description": "Extract Review ID",
+            "default": true
+        },
+        "scrapeReviewUrl": {
+            "title": "Review URL",
+            "type": "boolean",
+            "description": "Extract Review URL",
+            "default": true
+        },
+        "scrapeResponseFromOwnerText": {
+            "title": "Response from owner",
+            "type": "boolean",
+            "description": "Extract Response from owner",
+            "default": true
+        },
         "country": {
             "title": "Country",
             "type": "string",
-            "description": "Set the country where the search should be performed, e.g. 'USA'. For more accurate search, set state, city or lat + lng.",
+            "description": "Set the country where the search should be performed, e.g. 'USA'.",
             "editor": "textfield",
             "sectionCaption": "Geolocation",
-            "sectionDescription": "Here you can set where places should be searched. Either use country (and optionally state, city or postal code) or latitude and longitude for more accuracy. Using lat/long + zoom is generally much faster because the scraper doesn't traverse the whole country/state/city."
+            "sectionDescription": "Here you can set where places should be searched. Prefer using any combination of country, state, county, city or postal code to get maximum results. This scraper automatically chooses appropriate map zoom and splits the map into many smaller searches to catch as many places as possible. Currently, the scraper doesn't work well for full country searching of sparsely populated countries like USA or Russia. For these, prefer searching city by city or focus on populated states. Latitude and longitude or polygon don't have this functionality and will yield less results (but are faster)."
         },
         "state": {
             "title": "State",
             "type": "string",
-            "description": "Set a state where the search should be performed, e.g. 'Massachusetts', 'England', 'Berlin', etc. For a more accurate search, set city or lat + lng.",
+            "description": "Set a state where the search should be performed, e.g. 'Massachusetts', 'England', 'Berlin', etc.",
             "editor": "textfield"
         },
         "county": {
             "title": "County",
             "type": "string",
-            "description": "Set the county where the search should be performed, e.g. 'washington'. For more accurate search, set state, city or lat + lng.",
+            "description": "Set the county where the search should be performed, e.g. 'washington'.",
             "editor": "textfield"
         },
         "city": {
             "title": "City",
             "type": "string",
-            "description": "Set the city where the search should be performed, e.g. 'Pittsfield'. For a more accurate search, set lat and lng.",
+            "description": "Set the city where the search should be performed, e.g. 'Pittsfield'.",
             "editor": "textfield"
         },
         "postalCode": {
             "title": "Postal code",
             "type": "string",
-            "description": "Set the postal code where the search should be performed, e.g. 10001. Select a country as well to ensure the correct postal code is used. For a more accurate search, set lat and lng.",
+            "description": "Set the postal code where the search should be performed, e.g. 10001. Select a country as well to ensure the correct postal code is used.",
             "editor": "textfield"
         },
         "lat": {
             "title": "Viewport point latitude",
             "type": "string",
-            "description": "Use in combination with longitude and zoom to set the viewport to search on. Has preference over country/state/city/postal.",
+            "description": "Use in combination with longitude and zoom to set the viewport to search on. Do not combine with country/state/city/postal parameters (prefer those)",
             "editor": "textfield"
         },
         "lng": {
             "title": "Viewport point longitude",
             "type": "string",
-            "description": "Use in combination with latitude and zoom to set the viewport to search on. Has preference over country/state/city/postal.",
+            "description": "Use in combination with latitude and zoom to set the viewport to search on. Do not combine with country/state/city/postal parameters (prefer those)",
             "editor": "textfield"
         },
         "zoom": {
             "title": "Viewport zoom level",
             "type": "integer",
-            "description": "Defines how detailed the scrape will be. A higher zoom level goes deeper into scraping lesser known places, but will take more time to complete (with country/state/city) or extract smaller area (with lat + lng). Zoom 21 is a single street while zoom 1 is the whole planet. We recommend zoom 12-15 for most cases. You can test zoom by changing the number before 'z' in the URL: https://www.google.com/maps/@50.0860729,14.4135326,17z",
-            "default": 12,
+            "description": "You don't need to set this parameter. A good value is chosen automatically based on geolocation, see <a href='https://apify.com/drobnikj/crawler-google-places#automatic-zooming' target='_blank' rel='noopener'>readme</a> for more info.",
             "minimum": 1,
             "maximum": 21
         },
@@ -371,16 +403,19 @@
             "minimum": 0,
             "maximum": 10
         },
-        "polygon": {
-            "title": "Manual polygon",
+        "customGeolocation": {
+            "title": "Custom geolocation",
             "type": "object",
             "editor": "json",
-            "description": "Manual polygon to define exact search area if other geolocation parameters don't work well. See README for details."
+            "description": "Custom geolocation to define exact search area if other geolocation parameters don't work well. See see <a href='https://apify.com/drobnikj/crawler-google-places#custom-geolocation' target='_blank' rel='noopener'>readme</a> for details."
         },
         "proxyConfig": {
             "title": "Proxy configuration",
             "type": "object",
             "description": "You need to use Apify proxy or custom proxies. Automatic proxy works very well for Google Maps.",
+            "default": {
+                "useApifyProxy": true
+            },
             "prefill": {
                 "useApifyProxy": true
             },
@@ -421,5 +456,7 @@
             "default": 1
         }
     },
-    "required": ["proxyConfig"]
-  }
+    "required": [
+        "proxyConfig"
+    ]
+}
