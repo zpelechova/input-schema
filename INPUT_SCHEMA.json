@@ -240,7 +240,7 @@
           "prefill": 0,
           "unit": "reviews per place",
           "sectionCaption": "Reviews",
-          "sectionDescription": "If you want to also get reviews from the places you search, specify what you need bellow."
+          "sectionDescription": "If you want to also get reviews from the places you search, specify what you need bellow. \n Note that some of the fields contain <strong>personal data<strong>. Personal data is protected by the GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
       },
       "oneReviewPerRow": {
         "title": "One review per row",
@@ -293,10 +293,8 @@
       "scrapeReviewerName": {
           "title": "Reviewer name",
           "type": "boolean",
-          "description": "Extract Reviewer name",
-          "default": true,
-          "sectionCaption": "Personal data in reviews",
-          "sectionDescription": "All of these fields contain personal data. Personal data is protected by the GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
+          "description": "Extract Reviewer name - note the personal data warning.",
+          "default": true
       },
       "scrapeReviewerId": {
           "title": "Reviewer ID",
@@ -334,7 +332,7 @@
           "description": "Set the country where the search should be performed, e.g. 'USA'.",
           "editor": "textfield",
           "sectionCaption": "Advanced configuration (geolocation)",
-          "sectionDescription": "You can get the results faster when you use the location in the search above. For more or more specific results you can set precise geolocation for your search. Prefer using any combination of country, state, county, city or postal code to get maximum results. This scraper automatically chooses appropriate map zoom and splits the map into many smaller searches to catch as many places as possible. Currently, the scraper doesn't work well for full country searching of sparsely populated countries like USA or Russia. For these, prefer searching city by city or focus on populated states. Latitude and longitude or polygon don't have this functionality and will yield less results (but are faster)."
+          "sectionDescription": "You can get the results faster when you use the location in the search or URL above. For more or more specific results you can set precise geolocation for your search here. \n Prefer using any combination of country, state, county, city or postal code to get maximum results. This scraper automatically chooses appropriate map zoom and splits the map into many smaller searches to catch as many places as possible. Currently, the scraper doesn't work well for full country searching of sparsely populated countries like USA or Russia. For these, prefer searching city by city or focus on populated states. Latitude and longitude or polygon don't have this functionality and will yield less results (but are faster)."
       },
       "state": {
           "title": "State",
