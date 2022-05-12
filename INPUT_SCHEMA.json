@@ -4,17 +4,17 @@
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-      "searchStringsArray": {
-          "title": "Search Terms",
-          "type": "array",
-          "description": "Array of strings to be searched. It is also possible to fill in Google Place IDs in the format place_id:ChIJp4JiUCNP0xQR1JaSjpW_Hms. Setting geolocation input fields is more accurate than including location in the search string.",
-          "editor": "stringList",
-          "prefill": [
-              "restaurant New York"
-          ]
-      },
-      "startUrls": {
-          "title": "URL(s)",
+    "searchStringsArray": {
+      "title": "Search Terms (and Location)",
+      "type": "array",
+      "description": "Here you write what you search for and where you want to search it for, so e.g. 'restaurant New York', or 'pet shelter USA'. It is also possible to fill in Google Place IDs in the format place_id:ChIJp4JiUCNP0xQR1JaSjpW_Hms. Setting geolocation input fields is more accurate than including location in the search string.",
+      "editor": "stringList",
+      "prefill": [
+          "restaurant New York"
+      ]
+  },
+  "startUrls": {
+          "title": "Start URLs",
           "type": "array",
           "description": "List of URLs to be crawled. They can be search URLs or place URLs. The only valid format for URLs contains either /maps/search or /maps/place",
           "editor": "requestListSources"
@@ -194,25 +194,6 @@
           "example": "en",
           "prefill": "en"
       },
-      "allPlacesNoSearchAction": {
-          "title": "Scrape all places (no search term)",
-          "description": "Will scrape all places seen on the map. This depends on a lot of the zoom so for more places, increase the zoom. Doesn't work together with URLs",
-          "enum": [
-              "",
-              "all_places_no_search_mouse",
-              "all_places_no_search_ocr"
-          ],
-          "enumTitles": [
-              "Not applied (normal search or direct places)",
-              "Scrape by Moving mouse (slow)",
-              "Scrape by OCR tool (fast but you need 256 MB of extra memory to call another actor)"
-          ],
-          "type": "string",
-          "editor": "select",
-          "default": "",
-          "example": "",
-          "prefill": ""
-      },
       "exportPlaceUrls": {
           "title": "Export place URLs only (skips place details)",
           "type": "boolean",
@@ -245,12 +226,6 @@
           "description": "Extract additional information about each place, e.g. Service Options, Highlights, Offerings, etc. You can speed up crawling if you disable this.",
           "default": false
       },
-      "oneReviewPerRow": {
-          "title": "One review per row",
-          "type": "boolean",
-          "description": "If checked, the scraper will produce one row of results per each review. The information about the place is copied to each row.",
-          "default": false
-      },
       "maxImages": {
           "title": "Number of images (Slow for more than 1)",
           "type": "integer",
@@ -263,9 +238,17 @@
           "type": "integer",
           "description": "Max number of reviews per place to scrape. If you fill in 0 or nothing, no reviews will be scraped. For all reviews, just put 99999",
           "prefill": 0,
-          "unit": "reviews per place"
+          "unit": "reviews per place",
+          "sectionCaption": "Reviews",
+          "sectionDescription": "If you want to also get reviews from the places you search, specify what you need bellow."
       },
-      "reviewsStartDate": {
+      "oneReviewPerRow": {
+        "title": "One review per row",
+        "type": "boolean",
+        "description": "If checked, the scraper will produce one row of results per each review. The information about the place is copied to each row.",
+        "default": false
+    },
+    "reviewsStartDate": {
           "title": "Reviews start date (scrape only newer than)",
           "type": "string",
           "description": "Format should be YYYY-MM-DD, e.g. 2022-02-20",
@@ -312,7 +295,7 @@
           "type": "boolean",
           "description": "Extract Reviewer name",
           "default": true,
-          "sectionCaption": "Personal data (reviews only)",
+          "sectionCaption": "Personal data in reviews",
           "sectionDescription": "All of these fields contain personal data. Personal data is protected by the GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
       },
       "scrapeReviewerId": {
@@ -350,8 +333,8 @@
           "type": "string",
           "description": "Set the country where the search should be performed, e.g. 'USA'.",
           "editor": "textfield",
-          "sectionCaption": "Geolocation",
-          "sectionDescription": "Here you can set where places should be searched. Prefer using any combination of country, state, county, city or postal code to get maximum results. This scraper automatically chooses appropriate map zoom and splits the map into many smaller searches to catch as many places as possible. Currently, the scraper doesn't work well for full country searching of sparsely populated countries like USA or Russia. For these, prefer searching city by city or focus on populated states. Latitude and longitude or polygon don't have this functionality and will yield less results (but are faster)."
+          "sectionCaption": "Advanced configuration (geolocation)",
+          "sectionDescription": "You can get the results faster when you use the location in the search above. For more or more specific results you can set precise geolocation for your search. Prefer using any combination of country, state, county, city or postal code to get maximum results. This scraper automatically chooses appropriate map zoom and splits the map into many smaller searches to catch as many places as possible. Currently, the scraper doesn't work well for full country searching of sparsely populated countries like USA or Russia. For these, prefer searching city by city or focus on populated states. Latitude and longitude or polygon don't have this functionality and will yield less results (but are faster)."
       },
       "state": {
           "title": "State",
@@ -454,7 +437,28 @@
           "minimum": 0,
           "maximum": 100,
           "default": 1
-      }
+      },
+      "allPlacesNoSearchAction": {
+        "title": "Scrape all places (no search term)",
+        "description": "Will scrape all places seen on the map. This depends on a lot of the zoom so for more places, increase the zoom. Doesn't work together with URLs",
+        "enum": [
+            "",
+            "all_places_no_search_mouse",
+            "all_places_no_search_ocr"
+        ],
+        "enumTitles": [
+            "Not applied (normal search or direct places)",
+            "Scrape by Moving mouse (slow)",
+            "Scrape by OCR tool (fast but you need 256 MB of extra memory to call another actor)"
+        ],
+        "type": "string",
+        "editor": "select",
+        "default": "",
+        "example": "",
+        "prefill": "",
+        "sectionCaption": "Scraping places without search",
+        "sectionDescription": "This will get you all places from a specific place no matter if they are bakeries or petrol station. The scrape however will be significantly more costly then using a search so if you do not need this feature, don't use it." 
+    }
   },
   "required": [
       "proxyConfig"
