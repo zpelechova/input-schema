@@ -7,7 +7,8 @@
         "key": {
             "title": "Anticaptcha key",
             "type": "string",
-            "description": "The Anticaptcha key you get from your subscription from the anti-captcha.com service"
+            "description": "The Anticaptcha key you get from your subscription from the anti-captcha.com service",
+            "editor": "textfield"
         },
         "webUrl": {
             "title": "Protected website URL",
