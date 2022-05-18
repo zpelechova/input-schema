@@ -1,8 +1,8 @@
 {
     "title": "Anticaptcha recaptcha",
+    "description": "This actor is to be used by calling from another actor.",
     "type": "object",
     "schemaVersion": 1,
-    "description": "",
     "properties": {
         "key": {
             "title": "Anticaptcha key",
