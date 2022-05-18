@@ -2,11 +2,12 @@
     "title": "Anticaptcha recaptcha",
     "type": "object",
     "schemaVersion": 1,
+    "description": "",
     "properties": {
         "key": {
             "title": "Anticaptcha key",
             "type": "string",
-            "description": "The Anticaptcha key you get from your subscription from the anti-captcha.com service",
+            "description": "The Anticaptcha key you get from your subscription from the anti-captcha.com service"
         },
         "webUrl": {
             "title": "Protected website URL",
@@ -22,6 +23,7 @@
             "title": "Proxy type",
             "type": "string",
             "prefill": "http",
+            "description": "Proxy type",
             "sectionCaption": "Optional settings",
             "sectionDescription": "Some sites may require the captcha to be solved from the same IP address and/or browser, in such case it is possible to use the following input attributes (in addition to the default ones)."
         },
