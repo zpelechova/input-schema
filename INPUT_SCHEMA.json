@@ -1,6 +1,6 @@
 {
     "title": "Test actor input schema",
-    "description": "Let's check a link to a <a href='https://blog.apify.com/how-to-scrape-google-shopping/' target='_blank' rel='noopener'>tutorial blog post</a>.<br><br>Now let's try an non-iframe GIF: <img src='https://giphy.com/embed/3o6Mbbs879ozZ9Yic0'><br><br>Followed by emojis 👷‍♀️🎃👌👩‍⚖️👨‍💼🖐🦾 and also an image <br><br><img src='https://picsum.photos/500/300'>",
+    "description": "Let's check a link to a <a href='https://blog.apify.com/how-to-scrape-google-shopping/' target='_blank' rel='noopener'>tutorial blog post</a>.<br><br>Now let's try an non-iframe GIF: <img src='https://media3.giphy.com/media/3o7bu3XilJ5BOiSGic/giphy.gif?cid=790b76118399279666e259517692f3485cbfd59aa0246fcd&rid=giphy.gif&ct=g'><br><br>Followed by emojis 👷‍♀️🎃👌👩‍⚖️👨‍💼🖐🦾 and also an image <br><br><img src='https://picsum.photos/500/300'>",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
