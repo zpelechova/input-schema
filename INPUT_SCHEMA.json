@@ -14,7 +14,8 @@
         "usernames": {
             "title": "blah blah username 🎃",
             "type": "array",
-            "editor": "stringList"
+            "editor": "stringList",
+            "description": ""
         }
     },
     "required": ["username"]
